@@ -1,4 +1,4 @@
-console.log('')
+console.log('funcionou')
 const root = document.getElementById('news')
 
 fetch('https://lovely-worm-tux.cyclic.app/api')
