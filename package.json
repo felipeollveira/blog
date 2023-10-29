@@ -2,11 +2,11 @@
   "name": "blog",
   "version": "1.0.0",
   "description": "blog pessoal",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "jest",
     "f": "nodemon src/index",
-    "start": "node src/index"
+    "start": "node index"
   },
   "repository": { 
     "type": "git",
