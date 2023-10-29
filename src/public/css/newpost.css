@@ -1,0 +1,6 @@
+.createpost{
+    display: grid;
+    gap: 10px;
+    background-color: rgba(245, 245, 245, 0.601);
+    padding: 12px;
+}
