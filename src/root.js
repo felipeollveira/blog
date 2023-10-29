@@ -8,7 +8,7 @@ root.use(bodyParser.urlencoded({ extended: false }));
 root.use(bodyParser.json());
 
 root.get('/', (req, res) => {
-    res.render('pages/home')
+    res.render('home')
 })
 
 
