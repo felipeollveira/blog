@@ -89,7 +89,7 @@ lCardContainer.appendChild(divRoot)
 paragrafo.onclick = function() {
   fetch('/', {
     method: 'POST',
-    body: JSON.stringify({ id }),
+    body: JSON.stringify({ titulo, id }),
     headers: {
       'Content-Type': 'application/json',
     },
