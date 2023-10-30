@@ -25,9 +25,9 @@ img {
     display: grid;
     grid-template-columns: auto auto;
     gap: 15px;
-    width: auto; /* Você pode ajustar a largura conforme necessário */
-    min-width: 260px; /* Você pode ajustar a largura mínima conforme necessário */
-    max-width: auto; /* Você pode ajustar a largura máxima conforme necessário */
+    width: auto;
+    min-width: 260px; 
+    max-width: auto; 
     height: auto;
 	background: var(--background);
     color: #272727;

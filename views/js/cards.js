@@ -1,4 +1,3 @@
-console.log('funcionou')
 const root = document.getElementById('news')
 
 fetch('https://lovely-worm-tux.cyclic.app/api')
@@ -10,8 +9,8 @@ fetch('https://lovely-worm-tux.cyclic.app/api')
   })
   .then(data => { 
     
-    console.log(data.posts);
-    let limit = data.posts.length
+    //console.log(data.posts);
+
 
     for (const post of data.posts) {
     /*
@@ -24,7 +23,7 @@ fetch('https://lovely-worm-tux.cyclic.app/api')
         console.log("Introdução: " + post.introducao);
         console.log("\n");
     */
-   
+        let id = post.post_id
         let titulo = post.titulo
         let assunto = post.assunto
         let conclusao = post.conclusao
@@ -36,6 +35,7 @@ fetch('https://lovely-worm-tux.cyclic.app/api')
 
 let divRoot = document.createElement("div");
 divRoot.setAttribute("class", "cards");
+
 
 let sectionText = document.createElement("section");
 sectionText.setAttribute("class", "l-card__text");
@@ -85,12 +85,28 @@ divRoot.appendChild(sectionUser);
 
 lCardContainer.appendChild(divRoot)
 
+
+paragrafo.onclick = function() {
+  fetch('/', {
+    method: 'POST',
+    body: JSON.stringify({ id }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => {
+      if (response.ok) {
+        // Redireciona para a resposta (página HTML)
+        window.location.href = response.url;
+      } else {
+        console.error('Erro ao enviar a solicitação: ', response.status);
       }
-
-
-
-
-
+    })
+    .catch(error => {
+      console.error('Erro ao enviar a solicitação: ', error);
+    });
+};
+};
 
 
   })
