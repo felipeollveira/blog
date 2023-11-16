@@ -1,4 +1,6 @@
-const root = document.getElementById('news')
+const root = document.getElementById('root');
+const not_post = document.getElementById('no-post')
+const footer = document.querySelector('footer')
 
 fetch('https://lovely-worm-tux.cyclic.app/api')
   .then(response => {
@@ -11,7 +13,7 @@ fetch('https://lovely-worm-tux.cyclic.app/api')
     
     //console.log(data.posts);
 
-
+  if(data.posts.length != 0){ 
     for (const post of data.posts) {
     /*
         console.log("Post ID: " + post.post_id);
@@ -32,64 +34,108 @@ fetch('https://lovely-worm-tux.cyclic.app/api')
         let introducao = post.introducao
 
 
+const dataFormat = data.substring(0,4)//4 primeiros digitos (o ano)
 
-let divRoot = document.createElement("div");
-divRoot.setAttribute("class", "cards");
+let divCard = document.createElement("div");
+divCard.setAttribute("class", "card");
 
+// Header
+let divHeader = document.createElement("div");
+divHeader.setAttribute("class", "header");
 
-let sectionText = document.createElement("section");
-sectionText.setAttribute("class", "l-card__text");
+// Title
+let aTitle = document.createElement("a");
+aTitle.setAttribute("class", "title");
+aTitle.setAttribute("href", "#");
+aTitle.textContent = titulo;
 
-let paragrafo = document.createElement("p");
-paragrafo.textContent = titulo;
-
-sectionText.appendChild(paragrafo);
-
-
-let sectionUser = document.createElement("section");
-sectionUser.setAttribute("class", "l-card__user");
-
-
-let divUserImage = document.createElement("div");
-divUserImage.setAttribute("class", "l-card__userImage");
-
-let userImage = document.createElement("img");
-userImage.setAttribute("src", "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fblog.nevercodealone.de%2Fwp-content%2Fuploads%2F2020%2F10%2Fnodejs-logo-1024x512.png&f=1&nofb=1&ipt=85410c44a48b98fc4c2a7b51f213137d9c6b892ccd18c31b89fb5c1f00de5a57&ipo=images");
-userImage.setAttribute("alt", "tech");
+// Name
+let aName = document.createElement("a");
+aName.setAttribute("class", "name");
+aName.setAttribute("href", 'https://github.com/felipeollveira');
+aName.setAttribute("target", "_blank");
+aName.textContent = '';
+// "By " + autor; 
 
 
-let divUserInfo = document.createElement("div");
-divUserInfo.setAttribute("class", "l-card__userInfo");
+divHeader.appendChild(aTitle);
+divHeader.appendChild(aName);
+
+// Image
+let spanImage = document.createElement("span");
+spanImage.setAttribute("class", "image");
+// Se desejar adicionar uma imagem, pode fazê-lo aqui.
+
+divHeader.appendChild(spanImage);
+
+divCard.appendChild(divHeader);
+
+// Description
+let pDescription = document.createElement("p");
+pDescription.setAttribute("class", "description");
+
+// O limite de caracteres é de 156
+const maxLength = 156;
+// se haver mais de 156 char no texto ele corta no primeiro '.'(ponto)
+// adiciona '...'(reticencias) no primeiro ponto
+if (introducao.length > maxLength) {
+  const truncatedText = introducao.substring(0, maxLength);
+  const lastPeriodIndex = truncatedText.lastIndexOf('.','!');
+
+  if (lastPeriodIndex !== -1) {
+    pDescription.textContent = truncatedText.substring(0, lastPeriodIndex + 1) + '..';
+  } else pDescription.textContent = truncatedText + '...';
+} else pDescription.textContent = introducao;
+
+divCard.appendChild(pDescription);
+
+// Post Info
+let dlPostInfo = document.createElement("div");
+dlPostInfo.setAttribute("class", "post-info");
+
+// Published Date
+let divPublished = document.createElement("div");
+divPublished.setAttribute("class", "cr");
+
+let dtPublished = document.createElement("dt");
+dtPublished.setAttribute("class", "dt");
+dtPublished.textContent = "Publicado";
+
+let ddPublished = document.createElement("dd");
+ddPublished.setAttribute("class", "dd");
+ddPublished.textContent = new Date(data).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+divPublished.appendChild(dtPublished);
+divPublished.appendChild(ddPublished);
+
+// Tempo de leitura"
+let divReadingTime = document.createElement("div");
+divReadingTime.setAttribute("class", "cr");
+
+let dtReadingTime = document.createElement("dt");
+dtReadingTime.setAttribute("class", "dt");
+dtReadingTime.textContent = "Tempo de leitura";
+let tempoLeitura = 5;
+let ddReadingTime = document.createElement("dd");
+ddReadingTime.setAttribute("class", "dd");
+ddReadingTime.textContent = tempoLeitura + " minutos";
+
+divReadingTime.appendChild(dtReadingTime);
+divReadingTime.appendChild(ddReadingTime);
+
+dlPostInfo.appendChild(divPublished);
+dlPostInfo.appendChild(divReadingTime);
+
+divCard.appendChild(dlPostInfo);
 
 
-let spanUser1 = document.createElement("span");
-spanUser1.textContent = "NODEJS";
-
-let spanUser2 = document.createElement("span");
-spanUser2.textContent = data;
-
-divUserImage.appendChild(userImage);
-
-divUserInfo.appendChild(spanUser1);
-divUserInfo.appendChild(spanUser2);
-
-sectionUser.appendChild(divUserImage);
-sectionUser.appendChild(divUserInfo);
-
-let lCardContainer = document.querySelector(".l-card");
+root.appendChild(divCard);
 
 
-
-divRoot.appendChild(sectionText);
-divRoot.appendChild(sectionUser);
-
-lCardContainer.appendChild(divRoot)
-
-
-paragrafo.onclick = function() {
+aTitle.onclick = function() {
   fetch('/', {
     method: 'POST',
-    body: JSON.stringify({ titulo, id }),
+    body: JSON.stringify({ titulo, id, dataFormat }),
     headers: {
       'Content-Type': 'application/json',
     },
@@ -102,15 +148,75 @@ paragrafo.onclick = function() {
         console.error('Erro ao enviar a solicitação: ', response.status);
       }
     })
+    
     .catch(error => {
       console.error('Erro ao enviar a solicitação: ', error);
     });
 };
+
 };
 
+
+if (data.posts.length === 1) {
+  not_post.style.width = '40' + '%';
+  not_post.style.display = 'flex';
+}
+
+}else{
+
+  let sempostagem = document.createElement("div")
+
+  let nopost = document.createElement("p");
+  nopost.setAttribute("class", "no-post");
+  nopost.textContent = 'Por enquanto, nada por aqui :|'
+
+  sempostagem.appendChild(nopost);
+  not_post.style.display = 'flex';
+
+  // Criação da seção
+let sectionFooter = document.createElement("section");
+sectionFooter.setAttribute("class", "footer");
+
+// Criação do parágrafo
+let paragraph = document.createElement("p");
+paragraph.textContent = "Inscreva-se para receber nossas atualizações por email:";
+
+// Criação do formulário
+let form = document.createElement("form");
+
+// Criação do campo de email
+let emailInput = document.createElement("input");
+emailInput.setAttribute("type", "email");
+emailInput.setAttribute("placeholder", "Seu endereço de email");
+
+// Criação do botão de inscrição
+let submitButton = document.createElement("input");
+submitButton.setAttribute("type", "submit");
+submitButton.setAttribute("value", "Inscrever-se");
+
+// Adição dos elementos ao formulário
+form.appendChild(emailInput);
+form.appendChild(submitButton);
+
+// Adição dos elementos à seção
+sectionFooter.appendChild(paragraph);
+sectionFooter.appendChild(form);
+
+// Adição da seção ao corpo do documento
+sempostagem.appendChild(sectionFooter);
+not_post.appendChild(sempostagem)
+
+
+
+
+  
+  footer.style.display = 'none'
+  
+}
 
   })
   .catch(error => {
     console.error(error);
   });
+
 
