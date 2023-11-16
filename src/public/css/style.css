@@ -1,6 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css?family=Proxima+Nova');
 :root {
+    --colorfooter: rgb(43, 43, 43);
     --colorsystem: rgb(48, 82, 154);
     --cor-h1: rgb(213, 213, 213);
     --background: rgb(12, 12, 12);
@@ -27,7 +28,7 @@ body{
 aside{
     position: sticky;
     top: 70px;
-    height: 10px;
+    height: max-content;
 }
 
 .home-grid{
@@ -40,12 +41,19 @@ aside{
 
 main{
     padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 footer{
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+    max-width: auto;
 }
 
+.main-footer{
+    display: grid;
+    gap: 50px;
+}
 
 .head{
     background-color: rgb(2, 2, 2);
@@ -55,6 +63,40 @@ footer{
     font-size: 10pt;
     gap: 50%;
 }
+
+@media screen and (max-width: 500px) {
+    .home-grid{
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 20px;
+    }
+    .home-grid-mobile{
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 400px;
+    }
+
+    aside{
+        padding-top: 14px;
+        position:static;
+    }
+}
+
+
+@media screen and (min-width: 501px) {
+    .home-grid{
+        display: flex;
+    grid-template-columns: 85% auto;
+    flex-direction: row-reverse;
+    padding: 10px;
+    gap: 1%;
+    }
+
+
+}
+
+
+
 
 /* loading */
 

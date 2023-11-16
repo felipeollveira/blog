@@ -16,11 +16,14 @@
         <div id="loading-spinner"></div>
     </div>
 
-    <div class="home-grid">
+    <div class="home-grid" id="grid">
         <article class="case-not-post" id="no-post"></article>
-    <div class="news" id="root">
-
-
+    <div class="main-footer">
+        <div class="news" id="root"></div>
+        
+        <footer>
+            <%- include('../partials/footer'); %>
+        </footer>
     </div>
     <aside>
         <%- include('../partials/aside'); %>
@@ -28,9 +31,7 @@
     </div>
 </main>
 
-<footer>
-    <%- include('../partials/footer'); %>
-</footer>
+
 
 <script type="text/javascript" src="static/js/animacoes.js"></script>
 <script type="text/javascript" src="static/js/cards.js"></script>

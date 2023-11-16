@@ -15,7 +15,7 @@
     display: grid;
     grid-template-columns: auto auto;
     gap: 15px;
-    min-width: 300px;
+    min-width: 100px;
 
 
 }
@@ -111,4 +111,28 @@
     font-size: 0.75rem;
     line-height: 1rem;
     color: rgba(107, 114, 128,1);
+  }
+
+  @media screen and (max-width: 700px) {
+    .news{
+      display: flex;
+      flex-direction: column;
+    }
+    .card{
+      max-width: auto;
+    }
+
+
+  }
+
+  @media screen and (max-width: 340px) {
+    .news{
+      display: flex;
+      flex-direction: column;
+    }
+    .card{
+      
+    }
+
+
   }

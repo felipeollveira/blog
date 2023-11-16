@@ -1,5 +1,24 @@
 
+@media screen and (max-width: 500px) {
+    .active{
+        display: block;
+    }
+   .menu{
+    display: none;
+   }
 
+   .dropdown{
+    display: inline-block;
+}
+}
+
+@media screen and (min-width: 501px) {
+    .dropdown{
+        display: none;
+    }
+
+   
+}
 
 .actions {
     padding: 12px;
@@ -8,13 +27,13 @@
     border: 1px solid var(--cor-borda);
     border-radius: 0.5rem;
     background-color: var(--background-fl);
+    
 
-       
 }
 
 .aside-actions{
   display: grid;
-  gap: 7.8%;
+  gap: 4%;
 
 }
 .actions p{
@@ -64,6 +83,7 @@
 
 }
 
+
 blockquote{
     font-size: 12px;
     color: #555;
@@ -100,7 +120,7 @@ blockquote{
 }
 
 .dropdown {
-    display: inline-block;
+display: auto;
     cursor: pointer;
     width: auto;
 }

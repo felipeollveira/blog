@@ -41,8 +41,13 @@ nav {
 	font-size: 14px;
 	background: none;
 	border: 1px solid rgba(128, 128, 128, 0.249);
+	z-index: 1;
+	background-color: rgba(10, 10, 10, 0.449);
   }
-  
+  input[type="search"]:hover{
+background-color: rgb(10, 10, 10);
+  }
+
   button[type="submit"] {
 	background-color: #333;
 	color: white;
@@ -58,7 +63,7 @@ nav {
   }
   
   /* Estilos responsivos */
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 500px) {
 	.container_nav {
 	  flex-direction: column;
 	  gap: 10px;
