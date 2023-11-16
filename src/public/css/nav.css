@@ -1,0 +1,77 @@
+/* Estilo para o nav na versão desktop */
+nav {
+	background: rgba(0, 0, 0, 0.333);
+    width: 100%;
+    position: fixed;
+	top: 10;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+	transition: top 0.3s ease-in-out;
+	border-bottom: 1px solid var(--cor-borda);
+
+  }
+
+  .container_nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 6px;
+	margin-left: 5%;
+	margin-right: 5%;
+
+  }
+  
+  .name_blog {
+	color: white;
+	font-size: 14pt;
+	font-weight: bold;
+  }
+  
+  #masthead-search {
+	display: flex;
+	align-items: center;
+  }
+  
+  input[type="search"] {
+	padding: 6px;
+	border: none;
+	border-radius: 5px;
+	width: 250px;
+	color: whitesmoke;
+	font-size: 14px;
+	background: none;
+	border: 1px solid rgba(128, 128, 128, 0.249);
+  }
+  
+  button[type="submit"] {
+	background-color: #333;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+	margin-left: 10px;
+	cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+	background-color: #555;
+  }
+  
+  /* Estilos responsivos */
+  @media screen and (max-width: 768px) {
+	.container_nav {
+	  flex-direction: column;
+	  gap: 10px;
+	  text-align: center;
+	}
+  
+	input[type="search"] {
+	  width: 100%;
+	}
+  
+	button[type="submit"] {
+	  margin-left: 0;
+	}
+  }
+  
+

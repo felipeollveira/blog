@@ -1,0 +1,39 @@
+
+
+/* Adicione este código ao seu arquivo /css/footer.css */
+
+.footer {
+ 
+    text-align: center;
+    position: sticky;
+    top: 0;
+}
+
+.footer p {
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: rgb(42, 42, 42);
+}
+
+.footer form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer input[type="email"] {
+    padding: 8px;
+    margin-right: 5px;
+    width: 200px;
+    background-color: var(--background-fl);
+    border: 1px solid var(--cor-borda);
+    color: white;
+}
+
+.footer input[type="submit"] {
+    padding: 8px 15px;
+    background-color: var(--background-fl);
+    border: 1px solid var(--colorsystem);
+    color: var(--colorsystem);
+    cursor: pointer;
+}

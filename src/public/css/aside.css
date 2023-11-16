@@ -1,0 +1,150 @@
+
+
+
+.actions {
+    padding: 12px;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--cor-borda);
+    border-radius: 0.5rem;
+    background-color: var(--background-fl);
+
+       
+}
+
+.aside-actions{
+  display: grid;
+  gap: 7.8%;
+
+}
+.actions p{
+    color: rgb(139, 139, 139);
+    text-align: left;
+}
+
+.aside-content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.aside-header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    gap: 5px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+}
+
+.autor-info{
+    display: flex;
+    flex-direction: row;
+}
+
+.autor{
+    color: #3366cc;
+    font-size: 10pt;
+    justify-content: right;
+    }
+
+.img-autor{
+    display: block;
+    flex-shrink: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    border-radius: 1rem;
+    object-fit: cover;
+    background-color: royalblue;
+
+}
+
+blockquote{
+    font-size: 12px;
+    color: #555;
+}
+
+
+.aside h1 {
+    font-size: 12pt;
+    color: #3366cc; 
+    font-style: italic; 
+    margin-bottom: 10px;
+}
+
+.aside ul {
+    display: grid;
+    gap: 6px;
+    list-style:square;
+    padding: 0;
+    margin: 0;
+    padding-left: 10px;
+    line-height: 0.50rem;
+}
+
+.aside li {
+    font-size: 12px;
+    color: var(--colorsystem);
+    cursor: pointer;
+    padding: 2px;
+    line-height: 12px;
+}
+
+.aside li:hover{
+    text-decoration: underline;
+}
+
+.dropdown {
+    display: inline-block;
+    cursor: pointer;
+    width: auto;
+}
+
+.dropdown-title {
+    font-size: 8pt;
+    color: #696969;
+
+}  
+
+.dropdown-content {
+
+    display: none;
+    position: absolute;
+    background-color: #121212;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    transform: translateX(-80px);
+    border: 1px solid var(--cor-borda);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Estilo para a seta do dropdown */
+.arrow-down {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #333; 
+    margin-left: 4px;
+}
+
+/* Estilos para os itens do dropdown */
+.dropdown-content a {
+    border-top: 1px solid var(--cor-borda);
+    color: #555555;
+    width: max-content;    
+    padding: 8px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+    font-size: 8pt;
+}

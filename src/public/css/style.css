@@ -1,9 +1,13 @@
 
 @import url('https://fonts.googleapis.com/css?family=Proxima+Nova');
 :root {
-    --background: background-color: rgb(247, 247, 247);
-    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-   }
+    --colorsystem: rgb(48, 82, 154);
+    --cor-h1: rgb(213, 213, 213);
+    --background: rgb(12, 12, 12);
+    --background-fl:rgba(17, 17, 17, 0.548);
+    --cor-borda: rgba(42, 42, 42, 0.843);
+    --bs-font-sans-serif: 'Proxima Nova', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
 
 *{
     margin: 0;
@@ -13,8 +17,35 @@
 }
 
 body{
-    background-color: var(--background)
+    background-color: var(--background);
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
 }
+
+aside{
+    position: sticky;
+    top: 70px;
+    height: 10px;
+}
+
+.home-grid{
+    display: flex;
+    grid-template-columns: 85% auto;
+    flex-direction: row-reverse;
+    padding: 10px;
+    gap: 1%;
+}
+
+main{
+    padding: 10px;
+}
+
+footer{
+    margin-bottom: 50px;
+}
+
 
 .head{
     background-color: rgb(2, 2, 2);
@@ -25,13 +56,33 @@ body{
     gap: 50%;
 }
 
-nav {
-    background-color: rgb(16, 16, 16);
-    display: flex;
-    padding: 6px;
-    gap: 10px;
+/* loading */
+
+#loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
 }
-nav a {
-    text-decoration: none;
-    color: whitesmoke;
+
+#loading-spinner {
+	border: 4px solid #f3f3f3;
+	border-top: 4px solid #3498db;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+/* Estilos para o conteúdo após o carregamento */
+body.loaded {
+	opacity: 1;
+	transition: opacity 1s ease-in-out;
 }
