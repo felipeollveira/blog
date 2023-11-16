@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <%- include('../partials/head'); %>
-    
+    <link rel="stylesheet" type="text/css" href="/css/cards.css">
 
 </head>
 <body class="container">
@@ -11,9 +11,20 @@
     <%- include('../partials/header'); %>
 </header>
 
-<main>
-    <div class="news">
-        <%- include('../partials/news'); %>
+<main style="display: none;">
+    <div id="loading">
+        <div id="loading-spinner"></div>
+    </div>
+
+    <div class="home-grid">
+        <article class="case-not-post" id="no-post"></article>
+    <div class="news" id="root">
+
+
+    </div>
+    <aside>
+        <%- include('../partials/aside'); %>
+    </aside>
     </div>
 </main>
 
@@ -21,7 +32,21 @@
     <%- include('../partials/footer'); %>
 </footer>
 
+<script type="text/javascript" src="static/js/animacoes.js"></script>
 <script type="text/javascript" src="static/js/cards.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+        document.body.classList.add('loaded');
+
+        document.querySelector('main').style.display = 'block';
+
+        // Remove o elemento de loading
+        var loadingElement = document.getElementById('loading');
+        loadingElement.parentNode.removeChild(loadingElement);
+    }, 500);
+    });
+</script>
 </body>
 
 

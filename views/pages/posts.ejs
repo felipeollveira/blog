@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <%- include('../partials/head'); %>
-    
-
+    <link rel="stylesheet" type="text/css" href="/css/posts.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body class="container">
 
@@ -12,16 +12,53 @@
 </header>
 
 <main>
-    <div class="post">
+    <div id="loading">
+        <div id="loading-spinner"></div>
+    </div>
+
+    <div class="root" id="pub" style="display:none;">
+        <section id="paginaAnterior"><a href="/">Voltar</a>
+        </section>
+        <section class="data"><span id="dataPub"></span></section>
+
+        <section class="titulo">
+            <h1 id="nomeTitulo"></h1>
+        </section>
+
+    <img id="capa" alt="imagem relacao blog" width="100%">
+    <hr>
+       <div class="grid">
+        <div id="container"></div>
+       
         
     </div>
-</main>
+     <hr>
+    </div> 
 
-<footer>
+
+
+</main>
+   <footer>
     <%- include('../partials/footer'); %>
 </footer>
 
-<script type="text/javascript" src="static/js/cards.js"></script>
+
+<script type="text/javascript" src="/static/js/animacoes.js"></script>
+<script type="text/javascript" src="/static/js/post.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+        document.body.classList.add('loaded');
+
+        document.getElementById('pub').style.display = 'block';
+
+        // Remove o elemento de loading
+        var loadingElement = document.getElementById('loading');
+        loadingElement.parentNode.removeChild(loadingElement);
+    }, 300);
+    });
+</script>
+
 </body>
 
 
