@@ -1,7 +1,6 @@
 const express = require('express')
 const root = express();
 const bodyParser = require('body-parser');
-const pub = require('./controls/posts');
 root.set('view engine','ejs')
 
 
@@ -14,14 +13,20 @@ root.get('/', (req, res) => {
   });
   
   root.post('/', (req, res) => {
-    const id = req.body.id;
-    const titulo = req.body.titulo
-    console.log(`Post clicado ID: ${id}`)
-    res.redirect(`/post/${titulo}/${id}`);
+    const id = req.body.id
+    const titulo = req.body.titulo;
+    const data = req.body.dataFormat
+
+    try { 
+      console.log(`post id clicado: ${id}`)
+        res.redirect(`/${data}/${titulo}0${id}`);
+    } catch (error) {
+        console.log(error)
+    }
   });
   
 
-  root.get('/post/:titulo/:id', (req, res) => {
+  root.get('/:data/:titulo', (req, res) => {
     res.render('pages/posts');
 
   });
