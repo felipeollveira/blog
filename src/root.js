@@ -1,6 +1,7 @@
 const express = require('express')
 const root = express();
 const bodyParser = require('body-parser');
+const path = require('path');
 root.set('view engine','ejs')
 
 root.set('views', path.join(__dirname, 'views'));
