@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 root.set('view engine','ejs')
 
-root.set('views', path.join(__dirname, 'views'));
+root.set('views', path.join(__dirname, '..', 'views'));
 
 root.use(bodyParser.urlencoded({ extended: false }));
 root.use(bodyParser.json());
