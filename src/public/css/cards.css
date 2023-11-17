@@ -42,6 +42,7 @@
     justify-content: space-between;
     grid-gap: 1rem;
     gap: 1rem;
+    width: 100%;
   }
   
   .title {
@@ -50,19 +51,19 @@
     font-weight: 700;
     color: var(--cor-h1);
     text-decoration: none;
-    width: 100%;
+    width: auto;
   }
   
   .title:hover {
     text-decoration: underline rgb(170, 170, 170);
   }
-  
+  /* nome ed autor se quiser */
   .name {
     margin-top: 0.25rem;
     font-size: 0.75rem;
     line-height: 1rem;
     font-weight: 500;
-    width: 50%;
+    width: 10%;
     text-align: right;
     color: rgba(75, 85, 99, 1);
   }
@@ -127,14 +128,42 @@
 
   }
 
-  @media screen and (max-width: 580px) {
+  @media screen and (min-width: 501px) and (max-width: 620px) {
     .news{
-      display: flex;
+      display: grid;
+      grid-template-columns: auto auto;
       flex-direction: column;
       align-items: center;
     }
     .card{
-      
+      max-width: 500px;
+      max-height: 250px;
+      min-height: 250px;
+    }
+    .title{
+      font-size: 16pt;
+    
+      }
+      .header{
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+        width: auto;
+      }
+
+
+
+
+  }
+
+  @media screen and (min-width: 0px) and (max-width: 500px) {
+    .news{
+      display: grid;
+      grid-template-columns: auto;
+      align-items: center;
+    }
+    .card{
+      max-width: 500px;
     }
 
 
