@@ -1,6 +1,7 @@
 
 .menu{
-    display: inline-block;
+    display: block;
+
 }
 
 @media screen and (max-width: 620px) {
@@ -48,6 +49,8 @@
     border: 1px solid var(--cor-borda);
     background-color: var(--background-fl);
     margin-bottom: 10px;
+
+
 }
 
 .actions p {
@@ -59,9 +62,11 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    height: 100%;
+    height: max-content;
     padding-bottom: 5px;
+   
 }
+
 
 .aside-header {
     display: flex;
@@ -130,9 +135,10 @@ blockquote {
 }
 
 .dropdown {
-    display: inline-block; /* Changed 'auto' to 'inline-block' for clarity */
+    display: inline-block; 
     cursor: pointer;
     width: auto;
+
 }
 
 .dropdown-title {
@@ -142,17 +148,14 @@ blockquote {
 
 .dropdown-content {
     display: none;
-    position: absolute;
+    position: relative;
     background-color: var(--background-fl);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     z-index: 1;
     transform: translateX(-80px);
-    border: 1px solid var(--cor-borda);
+    border: 1px solid var(--cor-borda); 
 }
 
-.dropdown:hover .dropdown-content {
-    display: block;
-}
 
 .arrow-down {
     display: inline-block;
