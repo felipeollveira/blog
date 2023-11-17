@@ -1,9 +1,8 @@
 
-/* @import url('https://fonts.googleapis.com/css?family=Proxima+Nova'); */
 
 @font-face {
     font-family: 'Proxima Nova';
-    src: url('../fonts/proximanova/Proxima.ttf ');
+    src: url('../fonts/proximanova/Proxima.ttf');
     font-weight: normal;
     font-style: normal;
 }
@@ -17,7 +16,7 @@
     --background: rgb(12, 12, 12);
     --background-fl:rgba(17, 17, 17, 0.548);
     --cor-borda: rgba(42, 42, 42, 0.843);
-    --bs-font-sans-serif: 'Proxima Nova', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-sans-serif: 'Proxima Nova', sans-serif
 }
 
 *{
