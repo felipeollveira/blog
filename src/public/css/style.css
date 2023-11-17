@@ -1,5 +1,13 @@
 
-@import url('https://fonts.googleapis.com/css?family=Proxima+Nova');
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('https://fonts.googleapis.com/css?family=Proxima+Nova') format('woff2');
+   
+    font-weight: normal;
+    font-style: normal;
+
+}
 :root {
     --colorfooter: rgb(43, 43, 43);
     --colorsystem: rgb(48, 82, 154);
