@@ -3,7 +3,7 @@ const root = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 root.set('view engine','ejs')
-
+// PROCURANDO PELA PASTA VIEWS no VERCEL
 root.set('views', path.join(__dirname, '..', 'views'));
 
 root.use(bodyParser.urlencoded({ extended: false }));
