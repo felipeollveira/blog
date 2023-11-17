@@ -14,7 +14,7 @@
 .news {
     display: grid;
     grid-template-columns: auto auto;
-    gap: 15px;
+    gap: 10px;
     min-width: 100px;
     justify-content: center;
 
@@ -29,7 +29,7 @@
 .card {
     display: grid;
     max-width: 400px;
-    max-height: max-content;
+    max-height: auto;
     position: relative;
     overflow: hidden;
     border: 1px solid var(--cor-borda);
@@ -44,6 +44,7 @@
     grid-gap: 1rem;
     gap: 1rem;
     width: 100%;
+    align-items: center;
   }
   
   .title {
@@ -62,8 +63,7 @@
   .name {
     margin-top: 0.25rem;
     font-size: 0.75rem;
-    line-height: 1rem;
-    font-weight: 500;
+      font-weight: 500;
     width: 10%;
     text-align: right;
     color: rgba(75, 85, 99, 1);
@@ -85,10 +85,11 @@
     color: rgba(107, 114, 128, 1);
     height: auto;
     text-align: justify;
+    width: 100%;
   }
   
   .post-info {
-   margin-top: 1%;
+   margin-top: 4%;
     display: flex;
     grid-gap: 1rem;
     gap: 1rem;
@@ -98,7 +99,7 @@
   .cr {
     display: flex;
     flex-direction: column-reverse;
-    margin-top: 5px;
+    margin-top: 10px;
   }
   
   .dt {

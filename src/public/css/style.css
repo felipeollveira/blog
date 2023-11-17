@@ -52,7 +52,7 @@ aside{
     grid-template-columns: 85% auto;
     flex-direction: row-reverse;
     padding: 10px;
-    gap: 1%;
+    gap: 4%;
 }
 
 main{
