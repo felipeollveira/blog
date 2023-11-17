@@ -4,8 +4,9 @@ const root = require('./root');
 const app = express();
 const { join } = require('path');
 require('dotenv').config()
+const sessionSecret = process.env.private_key
 
-app.use(session({ secret: 'process.env.private_key', resave: true, saveUninitialized: true }));
+app.use(session({ secret: sessionSecret, resave: true, saveUninitialized: true }));
 app.use(express.static(__dirname + '/public'));
 
 app.use('/static', express.static(join("views")))
