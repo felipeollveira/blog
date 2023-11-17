@@ -29,6 +29,7 @@
 .card {
     display: grid;
     max-width: 400px;
+    max-height: max-content;
     position: relative;
     overflow: hidden;
     border: 1px solid var(--cor-borda);
@@ -79,8 +80,7 @@
   }
   
   .description {
-    margin-top: 1rem;
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     line-height: 1.25rem;
     color: rgba(107, 114, 128, 1);
     height: auto;
@@ -88,7 +88,7 @@
   }
   
   .post-info {
-   margin-top: 8%;
+   margin-top: 1%;
     display: flex;
     grid-gap: 1rem;
     gap: 1rem;
@@ -123,6 +123,7 @@
     }
     .card{
       max-width: auto;
+
     }
 
 
