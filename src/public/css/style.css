@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css?family=Proxima+Nova');
+@import url('https://gfonts.vercel.app/specimen/Alata');
 :root {
     --colorfooter: rgb(43, 43, 43);
     --colorsystem: rgb(48, 82, 154);
@@ -7,7 +7,7 @@
     --background: rgb(12, 12, 12);
     --background-fl:rgba(17, 17, 17, 0.548);
     --cor-borda: rgba(42, 42, 42, 0.843);
-    --bs-font-sans-serif: "Belanosima";
+    --bs-font-sans-serif: "Alata";
 }
 
 *{
