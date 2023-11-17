@@ -6,6 +6,11 @@ const { join } = require('path');
 require('dotenv').config()
 const sessionSecret = process.env.private_key
 
+
+
+
+
+
 app.use(session({ secret: sessionSecret, resave: true, saveUninitialized: true }));
 app.use(express.static(__dirname + '/public'));
 
