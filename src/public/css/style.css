@@ -28,11 +28,13 @@ body{
 aside{
     position: sticky;
     top: 70px;
-    height: max-content;
+    height:500px;
+    overflow: hidden;
 }
 
 .home-grid{
     display: flex;
+    justify-content: center;
     grid-template-columns: 85% auto;
     flex-direction: row-reverse;
     padding: 10px;
@@ -64,16 +66,18 @@ footer{
     gap: 50%;
 }
 
+
 @media screen and (max-width: 500px) {
     .home-grid{
         display: flex;
         flex-direction: column-reverse;
-        gap: 20px;
+        gap: 25px;
+        align-content: center;
     }
     .home-grid-mobile{
-        display: flex;
+        display: flex;justify-content: center;
         flex-direction: column-reverse;
-        gap: 400px;
+        gap: 60px;
     }
 
     aside{
@@ -83,7 +87,7 @@ footer{
 }
 
 
-@media screen and (min-width: 501px) {
+@media screen and (min-width: 501px) and (max-width: 767px) {
     .home-grid{
         display: flex;
     grid-template-columns: 85% auto;
@@ -91,7 +95,7 @@ footer{
     padding: 10px;
     gap: 1%;
     }
-
+  
 
 }
 

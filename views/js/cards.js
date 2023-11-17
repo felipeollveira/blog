@@ -103,7 +103,7 @@ dtPublished.textContent = "Publicado";
 
 let ddPublished = document.createElement("dd");
 ddPublished.setAttribute("class", "dd");
-ddPublished.textContent = new Date(data).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+ddPublished.textContent = data.replace('-','/').substring(0,7)
 
 divPublished.appendChild(dtPublished);
 divPublished.appendChild(ddPublished);
