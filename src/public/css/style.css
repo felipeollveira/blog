@@ -1,13 +1,9 @@
 
-@import url('https://fonts.googleapis.com/css?family=Proxima+Nova');
+/* @import url('https://fonts.googleapis.com/css?family=Proxima+Nova'); */
 
 @font-face {
     font-family: 'Proxima Nova';
-    src: url('https://fonts.googleapis.com/css?family=Proxima+Nova');
-    src: url('fonts/Proxima.eot?#iefix') format('embedded-opentype'),
-         url('fonts/Proxima.woff2') format('woff2'),
-         url('fonts/Proxima.woff') format('woff'),
-         url('fonts/Proxima.ttf') format('truetype');
+    src: url('../fonts/proximanova/Proxima.ttf ');
     font-weight: normal;
     font-style: normal;
 }
