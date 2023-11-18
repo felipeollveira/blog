@@ -44,21 +44,16 @@
 
 
 .aside-header {
-    border-radius: 0.5rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--cor-borda);
-    background-color: var(--background-fl);
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: left;
-    justify-items: center;
-    padding: 5px;
-    gap: 5px;
-    border-radius: 6px;
-    margin-bottom: 8px;
-    width: auto;
+    padding: 6px;
+    gap: 10px;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.098);
+    margin-bottom: 4px;
 }
+
 
 .autor-info {
     display: flex;

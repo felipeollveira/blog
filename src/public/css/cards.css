@@ -84,6 +84,7 @@
     line-height: 1.25rem;
     color: rgba(107, 114, 128, 1);
     height: auto;
+    margin-top: 6px;
     text-align: justify;
     width: 100%;
   }
