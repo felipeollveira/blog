@@ -4,7 +4,7 @@
 
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 700px) {
     .active {
         display: block;
     }
@@ -21,7 +21,7 @@
    
 }
 
-@media screen and (min-width: 501px) and (max-width: 620px) {
+@media screen and (min-width: 640px) and (max-width: 700px) {
     .arrow-down {
         display: none;
     }
@@ -30,7 +30,7 @@
     }
 }
 
-@media screen and (min-width: 0px) and (max-width: 500px) {
+@media screen and (min-width: 0px) and (max-width: 640px) {
     .aside-header{
         text-align: center;
         justify-content: center;

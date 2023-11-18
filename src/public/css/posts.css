@@ -1,13 +1,66 @@
 
 
+@media screen and (min-width:0px) and (max-width: 429px) {
+    .root {
+        margin: 0 0 0 0;
+        padding: 0px;
+    }
+    .titulo{
+        font-size: 1.5em;
+        text-align: center;
+    }
+    .section-content{
+        font-size: 12pt;
+        line-height: 24px;
+        text-align: justify;
+    }
+  
+}
+
+
+@media screen and (min-width:430px) and (max-width: 600px) {
+    .root {
+        margin: 0 5% 0 5%;
+        padding: 0px;
+    }
+    .titulo{
+        font-size: 1.5em;
+        text-align: center;
+    }
+    .section-content{
+        font-size: 12pt;
+        line-height: 24px;
+        text-align: justify;
+    }
+  
+}
+
+@media screen and (min-width:601px) {
+    .root {
+        margin: 0 10% 0 10%;
+        padding: 0px;
+    }
+    .titulo{
+        font-size: 3em;
+    }
+    .section-content{
+        font-size: 14pt;
+        line-height: 30px;
+    }
+  
+}
+
+
+
 .root{
     max-width: auto;
-    margin: 0 10% 0 10%;
+   
     padding: 20px;
+    
 }
 
 .titulo {
-    font-size: 3em;
+    font-size: auto;
     text-align: center;
     color: #333;
     font-weight: 700;
@@ -40,10 +93,10 @@
 }
 
 .section {
-    padding: 15px;
+    border-top: 1px solid rgb(26, 26, 26);
     /* background-color: #00000061; */
     border-radius: 5px;
-    margin-top: 20px;
+    padding-top: 12px;
     
 }
 .strong{
@@ -54,12 +107,16 @@
     font-size: 2em;
     margin-bottom: 10px;
     color: #555;
+    
 }
 
 .section-content {
-    font-size: 1.2em;
+    font-size: auto;
     color: #b4b4b4;
     font-weight: 400;
+    margin-bottom: 20px;
+    
+    
 }
 
 #paginaAnterior a {
