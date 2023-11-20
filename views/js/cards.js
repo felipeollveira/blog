@@ -97,11 +97,11 @@ dlPostInfo.setAttribute("class", "post-info");
 let divPublished = document.createElement("div");
 divPublished.setAttribute("class", "cr");
 
-let dtPublished = document.createElement("dt");
+let dtPublished = document.createElement("p");
 dtPublished.setAttribute("class", "dt");
 dtPublished.textContent = "Publicado";
 
-let ddPublished = document.createElement("dd");
+let ddPublished = document.createElement("p");
 ddPublished.setAttribute("class", "dd");
 ddPublished.textContent = data.replace('-','/').substring(0,7)
 
@@ -112,11 +112,11 @@ divPublished.appendChild(ddPublished);
 let divReadingTime = document.createElement("div");
 divReadingTime.setAttribute("class", "cr");
 
-let dtReadingTime = document.createElement("dt");
+let dtReadingTime = document.createElement("p");
 dtReadingTime.setAttribute("class", "dt");
 dtReadingTime.textContent = "Tempo de leitura";
 let tempoLeitura = 5;
-let ddReadingTime = document.createElement("dd");
+let ddReadingTime = document.createElement("p");
 ddReadingTime.setAttribute("class", "dd");
 ddReadingTime.textContent = tempoLeitura + " minutos";
 

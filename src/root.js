@@ -14,24 +14,35 @@ root.get('/', (req, res) => {
     res.render('pages/home');
   });
   
-  root.post('/', (req, res) => {
-    const id = req.body.id
-    const titulo = req.body.titulo;
-    const data = req.body.dataFormat
+const extrairTitulo = (req, res, next) => {
+  const { titulo } = req.params;
+  req.titulo = titulo;
+  next();
+};
 
-    try { 
-      console.log(`post id clicado: ${id}`)
-        res.redirect(`/${data}/${titulo}0${id}`);
-    } catch (error) {
-        console.log(error)
-    }
-  });
-  
+// Rota para lidar com o POST
+root.post('/', (req, res) => {
+  const id = req.body.id;
+  const titulo = req.body.titulo;
+  const data = req.body.dataFormat;
 
-  root.get('/:data/:titulo', (req, res) => {
-    res.render('pages/posts');
+  try {
+    console.log(`post id clicado: ${id}`);
+    res.redirect(`/${data}/${titulo}`);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
-  });
+// Rota para lidar com o GET, usando o middleware personalizado
+root.get('/:data/:titulo', extrairTitulo, (req, res) => {
+  const titulo = req.titulo;
+
+  // Agora você tem acesso ao 'titulo' nesta rota
+
+  res.render('pages/posts', { titulo });
+});
+
   
 
 

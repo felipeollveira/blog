@@ -1,73 +1,88 @@
+// Função para obter o título da URL
+const obterTituloDaURL = () => {
+  const currentURL = window.location.href;
+  return decodeURIComponent(currentURL.split('/').pop());
+};
 
-const currentURL = window.location.href;
-const urlParts = currentURL.split('/');
-const lastPart = urlParts[urlParts.length - 1];
-  const ide = lastPart.slice(-2);
-
-
-console.log('ID da postagem:', ide);
-
-
-fetch('https://lovely-worm-tux.cyclic.app/api')
-  .then(response => {
+// Função para buscar o post na API
+const buscarPostNaAPI = async (tituloDoPost) => {
+  try {
+    const response = await fetch('https://lovely-worm-tux.cyclic.app/api');
     if (!response.ok) {
       throw new Error('Não foi possível obter os dados da API.');
     }
-    return response.json();
-  })
-  .then(data => { 
-    const ideNumero = parseInt(ide, 10);
-    const post = data.posts.find(post => post.post_id === ideNumero);
+
+    const data = await response.json();
+    const post = data.posts.find(post => post.titulo === tituloDoPost);
 
     if (post) {
-      console.log('Título da postagem:', post.titulo);
-      let id = post.post_id
-      let titulo = post.titulo
-      let assunto = post.desenvolvimento
-      let conclusao = post.conclusao
-      let data = post.data
-      let autor = post.autor
-      let introducao = post.introducao
 
-        
-function createElementWithClass(tag, className, content) {
-    const element = document.createElement(tag);
-    element.className = className;
-    element.textContent = content;
-    return element;
-}
-const assuntoSplit = introducao.split('');
-const contemAsterisco = assuntoSplit.includes('*');
+      //  estrutura HTML 
+      const body = document.getElementById('container');
 
+      // Criação da estrutura HTML
+      const dataPublicacao = document.getElementById("dataPub");
+      dataPublicacao.textContent = post.data.substring(0, 10);
 
-const regex = /\*(.*?)\*/; 
+      const header = document.getElementById("nomeTitulo");
+      header.className = "page-header";
+      header.textContent = post.titulo;
+      
+      const img = document.getElementById("capa");
 
+      if (post.images === null || post.images.trim() === '') {
+        img.style.display = 'none'; 
+      } else {
+        img.style.display = 'block'; 
+        img.src = post.images;
+      }
+      
+      img.src = post.images;
 
+      const introductionSection = criarSecao("section introduction", post.introducao);
+      const developmentSection = criarSecao("section development", post.desenvolvimento);
+      const conclusionSection = criarSecao("section conclusion", post.conclusao);
 
+      // Adiciona as seções ao corpo da página
+      body.insertBefore(conclusionSection, body.firstChild);
+      body.insertBefore(developmentSection, body.firstChild);
+      body.insertBefore(introductionSection, body.firstChild);
+    } else {
+      console.log('Postagem não encontrada');
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
+// Função auxiliar para criar seção HTML
+const criarSecao = (className, conteudo) => {
+  const section = document.createElement("section");
+  section.className = className;
+  const pSection = createElementWithClass("p", "section-content");
+  section.appendChild(pSection);
+  pSection.innerHTML = sanitizeHTML(formatTextWithAsterisks(conteudo));
+  return section;
+};
 
-// Criação da estrutura HTML
-const body = document.getElementById('container');
+// Função auxiliar para criar elemento com classe
+const createElementWithClass = (tag, className, content) => {
+  const element = document.createElement(tag);
+  element.className = className;
+  element.textContent = content;
+  return element;
+};
 
-// Cabeçalho da página
-const dataPublicacao = document.getElementById("dataPub")
-dataPublicacao.textContent = data.substring(0,10)
-
-const header = document.getElementById("nomeTitulo");
-header.className = "page-header";
-header.textContent = titulo
-
-//imagem src
-const img = document.getElementById("capa")
-img.src = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fblog.unipar.br%2Fwp-content%2Fuploads%2F2019%2F09%2Foriginal-d1f3afad676442faca79cdb67a25bc27.png&f=1&nofb=1&ipt=4831d35367c2ed72905f464e7789a8c7bdf31055e92a59d82cb7df49aa3ca0d9&ipo=images'
-
-const formatTextWithAsterisks = (text) =>  {
+// Função para formatar o texto com asteriscos, colchetes e hashtags
+const formatTextWithAsterisks = (text) => {
   const textSplit = text.split('');
   const hasAsterisks = textSplit.includes('*');
   
   let formattedText = [text];
 
-
+  if (textSplit.includes("/n")) {
+    formattedText = formattedText.map(text => text.replace(/\/n/g, '<br>'));
+  }
   if (textSplit.includes('[')) {
       formattedText = formattedText.map(text => text.replace(/\[(.*?)\]/g, '<article class="obs">$1</article>'));
   }if (textSplit.includes('#')) {
@@ -75,61 +90,20 @@ const formatTextWithAsterisks = (text) =>  {
   }if (hasAsterisks) {
       formattedText = formattedText.map(text => text.replace(/\*(.*?)\*/g, '<span class="strong">$1</span>'));
   }
-  
-  //  formattedText é um array que contém as formatações aplicadas
-
   const finalFormattedText = formattedText.join('');
   
   return finalFormattedText;
   
-}  
+};
+
+// Função para remover tags HTML não permitidas
+const sanitizeHTML = (text) => {
+  const textWithLineBreaks = text.replace(/\/n/g, '<br>');
+  const sanitizedText = textWithLineBreaks.replace(/<(?!\/?(span|article|a|br))[^>]*>/g, '');
+  return sanitizedText;
+};
 
 
-
-function sanitizeHTML(text) {
-  return text.replace(/<(?!\/?(span|article|a))[^>]*>/g, '');
-}
-
-
-
-
-// Seção de Introdução
-const introductionSection = document.createElement("section");
-introductionSection.className = "section introduction";
-const pIntroduction = createElementWithClass("p", "section-content");
-introductionSection.appendChild(pIntroduction);
-pIntroduction.innerHTML = sanitizeHTML(formatTextWithAsterisks(introducao));
-
-// Seção de Desenvolvimento
-const developmentSection = document.createElement("section");
-developmentSection.className = "section development";
-const pDevelopment = createElementWithClass("p", "section-content");
-developmentSection.appendChild(pDevelopment);
-pDevelopment.innerHTML = sanitizeHTML(formatTextWithAsterisks(assunto));
-
-// Seção de Conclusão
-const conclusionSection = document.createElement("section");
-conclusionSection.className = "section conclusion";
-const pConclusion = createElementWithClass("p", "section-content");
-conclusionSection.appendChild(pConclusion);
-pConclusion.innerHTML = sanitizeHTML(formatTextWithAsterisks(conclusao));
-
-//  elementos criados ao corpo da página
-body.appendChild(introductionSection);
-body.appendChild(developmentSection);
-body.appendChild(conclusionSection);
-
-} else {
-      console.log('Postagem não encontrada');
-    }
-})
-  .catch(error => {
-    console.error(error);
-    })
-
-
-
-
-
-
-
+// Chama as funções
+const tituloDoPost = obterTituloDaURL();
+buscarPostNaAPI(tituloDoPost);
