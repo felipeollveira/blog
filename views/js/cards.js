@@ -2,6 +2,7 @@ const root = document.getElementById('root');
 const not_post = document.getElementById('no-post')
 const footer = document.querySelector('footer')
 
+
 fetch('https://lovely-worm-tux.cyclic.app/api')
   .then(response => {
     if (!response.ok) {
@@ -15,16 +16,7 @@ fetch('https://lovely-worm-tux.cyclic.app/api')
 
   if(data.posts.length != 0){ 
     for (const post of data.posts) {
-    /*
-        console.log("Post ID: " + post.post_id);
-        console.log("Título: " + post.titulo);
-        console.log("Assunto: " + post.assunto);
-        console.log("Conclusão: " + post.conclusao);
-        console.log("Data: " + post.data);
-        console.log("Autor: " + post.autor);
-        console.log("Introdução: " + post.introducao);
-        console.log("\n");
-    */
+  
         let id = post.post_id
         let titulo = post.titulo
         let assunto = post.assunto
@@ -39,38 +31,38 @@ const dataFormat = data.substring(0,4)//4 primeiros digitos (o ano)
 let divCard = document.createElement("div");
 divCard.setAttribute("class", "card");
 
-// Header
+// header
 let divHeader = document.createElement("div");
 divHeader.setAttribute("class", "header");
 
-// Title
+// Titulo
 let aTitle = document.createElement("a");
 aTitle.setAttribute("class", "title");
 aTitle.setAttribute("href", "#");
 aTitle.textContent = titulo;
 
-// Name
+
 let aName = document.createElement("a");
 aName.setAttribute("class", "name");
 aName.setAttribute("href", 'https://github.com/felipeollveira');
 aName.setAttribute("target", "_blank");
 aName.textContent = '';
-// "By " + autor; 
+
 
 
 divHeader.appendChild(aTitle);
 divHeader.appendChild(aName);
 
-// Image
+// Imagens
 let spanImage = document.createElement("span");
 spanImage.setAttribute("class", "image");
-// Se desejar adicionar uma imagem, pode fazê-lo aqui.
+
 
 divHeader.appendChild(spanImage);
 
 divCard.appendChild(divHeader);
 
-// Description
+// Desc
 let pDescription = document.createElement("p");
 pDescription.setAttribute("class", "description");
 
@@ -89,11 +81,11 @@ if (introducao.length > maxLength) {
 
 divCard.appendChild(pDescription);
 
-// Post Info
+// infs
 let dlPostInfo = document.createElement("div");
 dlPostInfo.setAttribute("class", "post-info");
 
-// Published Date
+// data
 let divPublished = document.createElement("div");
 divPublished.setAttribute("class", "cr");
 
@@ -142,7 +134,7 @@ aTitle.onclick = function() {
   })
     .then(response => {
       if (response.ok) {
-        // Redireciona para a resposta (página HTML)
+        // Redireciona para página HTML)
         window.location.href = response.url;
       } else {
         console.error('Erro ao enviar a solicitação: ', response.status);
@@ -194,7 +186,7 @@ let submitButton = document.createElement("input");
 submitButton.setAttribute("type", "submit");
 submitButton.setAttribute("value", "Inscrever-se");
 
-// Adição dos elementos ao formulário
+// A dos elementos ao formulário
 form.appendChild(emailInput);
 form.appendChild(submitButton);
 

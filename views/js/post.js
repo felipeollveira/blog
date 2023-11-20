@@ -44,7 +44,7 @@ const buscarPostNaAPI = async (tituloDoPost) => {
       const developmentSection = criarSecao("section development", post.desenvolvimento);
       const conclusionSection = criarSecao("section conclusion", post.conclusao);
 
-      // Adiciona as seções ao corpo da página
+      //  seções ao corpo da página
       body.insertBefore(conclusionSection, body.firstChild);
       body.insertBefore(developmentSection, body.firstChild);
       body.insertBefore(introductionSection, body.firstChild);
