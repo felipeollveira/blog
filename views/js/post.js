@@ -1,7 +1,8 @@
-// Função para obter o título da URL
 const obterTituloDaURL = () => {
   const currentURL = window.location.href;
-  return decodeURIComponent(currentURL.split('/').pop());
+  const urlParts = currentURL.split('/');
+  const titulo = urlParts[urlParts.length - 1];
+  return decodeURIComponent(titulo);
 };
 
 // Função para buscar o post na API
