@@ -1,160 +1,162 @@
 .case-not-post{
-    width: 90vh;
-    display: none;
+  width: 90vh;
+  display: none;
 }
 
 .no-post{
-    color: rgb(37, 37, 37);
-    font-size: 30pt;
-    font-weight: 400;
-    text-align: right;
+  color: rgb(37, 37, 37);
+  font-size: 30pt;
+  font-weight: 400;
+  text-align: right;
 
 }
 
 .news {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 10px;
-    min-width: 100px;
-    justify-content: center; 
-    grid-template-rows: reverse;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
+  min-width: 100px;
+  justify-content: center; 
+  grid-template-rows: reverse;
 }
 
 
 .name{
-    text-decoration: none;
-    margin-left:auto;
+  text-decoration: none;
+  margin-left:auto;
 }
 
 .card {
-    display: grid;
-    flex-direction: column;
-    max-width: 450px;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid var(--cor-borda);
-    border-radius: 0.5rem;
-    padding: 1rem;
-    background-color: var(--background-fl);
+  display: grid;
+  flex-direction: column;
+  max-width: 450px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--cor-borda);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--background-fl);
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  grid-gap: 1rem;
+  gap: 1rem;
+  width: 100%;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.125rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  color: var(--cor-h1);
+  text-decoration: none;
+  width: auto;
+}
+
+.title:hover {
+  text-decoration: underline rgb(170, 170, 170);
+}
+/* nome ed autor se quiser */
+.name {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+    font-weight: 500;
+  width: 10%;
+  text-align: right;
+  color: rgba(75, 85, 99, 1);
+}
+
+.image {
+  display: block;
+  flex-shrink: 0;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  background-color: royalblue;
+}
+
+.description {
+  font-size: 0.9rem;
+  line-height: 1.25rem;
+  color: rgba(107, 114, 128, 1);
+  height: auto;
+  margin-top: 6px;
+  text-align: justify;
+  width: 100%;
+  overflow: auto;
+}
+
+
+.post-info {
+ margin-top: 4%;
+  display: flex;
+  grid-gap: 1rem;
+  gap: 1rem;
+  border-top: 1px solid rgb(29, 29, 29);
+}
+
+.cr {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: 10px;
+}
+
+.dt {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  color: rgba(75, 85, 99, 1);
+}
+
+.dd {
   
-  .header {
-    display: flex;
-    justify-content: space-between;
-    grid-gap: 1rem;
-    gap: 1rem;
-    width: 100%;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgba(107, 114, 128,1);
+}
+
+
+@media screen and (min-width: 641px) and (max-width: 768px) {
+  .news{
+    display: grid;
+    grid-template-columns: auto auto;
+    flex-direction: column;
     align-items: center;
   }
+  .card{
+    max-width: max-content;
+    min-height: 200px;
+    max-height: 250px;
+  }
+  .title{
+    font-size: 16pt;
   
-  .title {
-    font-size: 1.125rem;
-    line-height: 1.25rem;
-    font-weight: 700;
-    color: var(--cor-h1);
-    text-decoration: none;
-    width: auto;
-  }
-  
-  .title:hover {
-    text-decoration: underline rgb(170, 170, 170);
-  }
-  /* nome ed autor se quiser */
-  .name {
-    margin-top: 0.25rem;
-    font-size: 0.75rem;
-      font-weight: 500;
-    width: 10%;
-    text-align: right;
-    color: rgba(75, 85, 99, 1);
-  }
-  
-  .image {
-    display: block;
-    flex-shrink: 0;
-    height: 3rem;
-    width: 3rem;
-    border-radius: 0.5rem;
-    object-fit: cover;
-    background-color: royalblue;
-  }
-  
-  .description {
-    font-size: 0.9rem;
-    line-height: 1.25rem;
-    color: rgba(107, 114, 128, 1);
-    height: auto;
-    margin-top: 6px;
-    text-align: justify;
-    width: 100%;
-  }
-  
-  .post-info {
-   margin-top: 4%;
-    display: flex;
-    grid-gap: 1rem;
-    gap: 1rem;
-    border-top: 1px solid rgb(29, 29, 29);
-  }
-  
-  .cr {
-    display: flex;
-    flex-direction: column-reverse;
-    margin-top: 10px;
-  }
-  
-  .dt {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    font-weight: 600;
-    color: rgba(75, 85, 99, 1);
-  }
-  
-  .dd {
-    
-    font-size: 0.75rem;
-    line-height: 1rem;
-    color: rgba(107, 114, 128,1);
-  }
-
-
-  @media screen and (min-width: 641px) and (max-width: 768px) {
-    .news{
-      display: grid;
-      grid-template-columns: auto auto;
-      flex-direction: column;
-      align-items: center;
     }
-    .card{
-      max-width: max-content;
-      min-height: 200px;
-      max-height: 250px;
-    }
-    .title{
-      font-size: 16pt;
-    
-      }
-      .header{
-        display: flex;
-        flex-direction: row;
-        gap: 0;
-        width: auto;
-      }
-
-
-
-
-  }
-
-  @media screen and (min-width: 0px) and (max-width: 640px) {
-    .news{
-      display: grid;
-      grid-template-columns: auto;
-      align-items: center;
-    }
-    .card{
-      max-width: max-content;
+    .header{
+      display: flex;
+      flex-direction: row;
+      gap: 0;
+      width: auto;
     }
 
 
+
+
+}
+
+@media screen and (min-width: 0px) and (max-width: 640px) {
+  .news{
+    display: grid;
+    grid-template-columns: auto;
+    align-items: center;
   }
+  .card{
+    max-width: max-content;
+  }
+
+
+}

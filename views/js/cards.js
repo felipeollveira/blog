@@ -124,7 +124,7 @@ divCard.appendChild(dlPostInfo);
 root.appendChild(divCard);
 
 
-aTitle.onclick = function() {
+divHeader.onclick = function() {
   fetch('/', {
     method: 'POST',
     body: JSON.stringify({ titulo, id, dataFormat }),
@@ -155,54 +155,8 @@ if (data.posts.length === 1) {
 }
 
 }else{
-
-  let sempostagem = document.createElement("div")
-
-  let nopost = document.createElement("p");
-  nopost.setAttribute("class", "no-post");
-  nopost.textContent = 'Por enquanto, nada por aqui :|'
-
-  sempostagem.appendChild(nopost);
-  not_post.style.display = 'flex';
-
-  // Criação da seção
-let sectionFooter = document.createElement("section");
-sectionFooter.setAttribute("class", "footer");
-
-// Criação do parágrafo
-let paragraph = document.createElement("p");
-paragraph.textContent = "Inscreva-se para receber nossas atualizações por email:";
-
-// Criação do formulário
-let form = document.createElement("form");
-
-// Criação do campo de email
-let emailInput = document.createElement("input");
-emailInput.setAttribute("type", "email");
-emailInput.setAttribute("placeholder", "Seu endereço de email");
-
-// Criação do botão de inscrição
-let submitButton = document.createElement("input");
-submitButton.setAttribute("type", "submit");
-submitButton.setAttribute("value", "Inscrever-se");
-
-// A dos elementos ao formulário
-form.appendChild(emailInput);
-form.appendChild(submitButton);
-
-// Adição dos elementos à seção
-sectionFooter.appendChild(paragraph);
-sectionFooter.appendChild(form);
-
-// Adição da seção ao corpo do documento
-sempostagem.appendChild(sectionFooter);
-not_post.appendChild(sempostagem)
-
-
-
-
   
-  footer.style.display = 'none'
+
   
 }
 

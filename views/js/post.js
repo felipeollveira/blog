@@ -40,14 +40,43 @@ const buscarPostNaAPI = async (tituloDoPost) => {
       
       img.src = post.images;
 
-      const introductionSection = criarSecao("section introduction", post.introducao);
-      const developmentSection = criarSecao("section development", post.desenvolvimento);
-      const conclusionSection = criarSecao("section conclusion", post.conclusao);
-
+      function quebrarLinhaSeNecessario(texto, comprimentoMaximo) {
+        if (texto.length > comprimentoMaximo) {
+          let novaLinha = '';
+          let novoTexto = '';
+      
+          for (let i = 0; i < texto.length; i++) {
+            novaLinha += texto[i];
+      
+            if (novaLinha.length === comprimentoMaximo) {
+              novoTexto += novaLinha + '\n';
+              novaLinha = '';
+            }
+          }
+      
+          if (novaLinha.length > 0) {
+            novoTexto += novaLinha;
+          }
+      
+          return novoTexto;
+        }
+      
+        return texto;
+      }
+      
+      const introducaoFormatada = quebrarLinhaSeNecessario(post.introducao, 30);
+      const desenvolvimentoFormatado = quebrarLinhaSeNecessario(post.desenvolvimento, 30);
+      const conclusaoFormatada = quebrarLinhaSeNecessario(post.conclusao, 30);
+      
+      const introductionSection = criarSecao("section introduction", introducaoFormatada);
+      const developmentSection = criarSecao("section development", desenvolvimentoFormatado);
+      const conclusionSection = criarSecao("section conclusion", conclusaoFormatada);
+      
       //  seções ao corpo da página
       body.insertBefore(conclusionSection, body.firstChild);
       body.insertBefore(developmentSection, body.firstChild);
       body.insertBefore(introductionSection, body.firstChild);
+      
     } else {
       console.log('Postagem não encontrada');
     }
