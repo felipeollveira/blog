@@ -64,9 +64,9 @@ const buscarPostNaAPI = async (tituloDoPost) => {
         return texto;
       }
       
-      const introducaoFormatada = quebrarLinhaSeNecessario(post.introducao, 30);
-      const desenvolvimentoFormatado = quebrarLinhaSeNecessario(post.desenvolvimento, 30);
-      const conclusaoFormatada = quebrarLinhaSeNecessario(post.conclusao, 30);
+      const introducaoFormatada = quebrarLinhaSeNecessario(post.introducao, 70);
+      const desenvolvimentoFormatado = quebrarLinhaSeNecessario(post.desenvolvimento, 70);
+      const conclusaoFormatada = quebrarLinhaSeNecessario(post.conclusao, 70);
       
       const introductionSection = criarSecao("section introduction", introducaoFormatada);
       const developmentSection = criarSecao("section development", desenvolvimentoFormatado);
