@@ -39,34 +39,12 @@ const buscarPostNaAPI = async (tituloDoPost) => {
       }
       
       img.src = post.images;
+      
 
-      function quebrarLinhaSeNecessario(texto, comprimentoMaximo) {
-        if (texto.length > comprimentoMaximo) {
-          let novaLinha = '';
-          let novoTexto = '';
+      const introducaoFormatada = post.introducao
+      const desenvolvimentoFormatado = post.desenvolvimento
+      const conclusaoFormatada = post.conclusao
       
-          for (let i = 0; i < texto.length; i++) {
-            novaLinha += texto[i];
-      
-            if (novaLinha.length === comprimentoMaximo) {
-              novoTexto += novaLinha + '\n';
-              novaLinha = '';
-            }
-          }
-      
-          if (novaLinha.length > 0) {
-            novoTexto += novaLinha;
-          }
-      
-          return novoTexto;
-        }
-      
-        return texto;
-      }
-      
-      const introducaoFormatada = quebrarLinhaSeNecessario(post.introducao, 70);
-      const desenvolvimentoFormatado = quebrarLinhaSeNecessario(post.desenvolvimento, 70);
-      const conclusaoFormatada = quebrarLinhaSeNecessario(post.conclusao, 70);
       
       const introductionSection = criarSecao("section introduction", introducaoFormatada);
       const developmentSection = criarSecao("section development", desenvolvimentoFormatado);
@@ -76,6 +54,8 @@ const buscarPostNaAPI = async (tituloDoPost) => {
       body.insertBefore(conclusionSection, body.firstChild);
       body.insertBefore(developmentSection, body.firstChild);
       body.insertBefore(introductionSection, body.firstChild);
+
+      
       
     } else {
       console.log('Postagem não encontrada');
@@ -106,25 +86,27 @@ const createElementWithClass = (tag, className, content) => {
 // Função para formatar o texto com asteriscos, colchetes e hashtags
 const formatTextWithAsterisks = (text) => {
   const textSplit = text.split('');
-  const hasAsterisks = textSplit.includes('*');
-  
   let formattedText = [text];
 
-  if (textSplit.includes("/n")) {
-    formattedText = formattedText.map(text => text.replace(/\/n/g, '<br>'));
+  if (textSplit.includes("\n")) {
+    formattedText = formattedText.map(text => text.replace(/\n/g, '<br>'));
   }
   if (textSplit.includes('[')) {
-      formattedText = formattedText.map(text => text.replace(/\[(.*?)\]/g, '<article class="obs">$1</article>'));
-  }if (textSplit.includes('#')) {
-      formattedText = formattedText.map(text => text.replace(/#(.*?)#/g, `<a href="$1" target="_blank">Clique aqui!</a>`));
-  }if (hasAsterisks) {
-      formattedText = formattedText.map(text => text.replace(/\*(.*?)\*/g, '<span class="strong">$1</span>'));
+    formattedText = formattedText.map(text => text.replace(/\[(.*?)\]/g, '<article class="obs">$1</article>'));
   }
+
+  if (textSplit.includes('#')) {
+    formattedText = formattedText.map(text => text.replace(/#(.*?)#/g, `<a href="$1" target="_blank">Clique aqui!</a>`));
+  }
+
+  if (textSplit.includes('*')) {
+    formattedText = formattedText.map(text => text.replace(/\*(.*?)\*/g, '<span class="strong">$1</span>'));
+  }
+
   const finalFormattedText = formattedText.join('');
-  
   return finalFormattedText;
-  
 };
+
 
 // Função para remover tags HTML não permitidas
 const sanitizeHTML = (text) => {
