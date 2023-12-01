@@ -2,7 +2,7 @@ const root = document.getElementById('root');
 const not_post = document.getElementById('no-post')
 const footer = document.querySelector('footer')
 
-
+//api
 fetch('https://dark-gold-dog-yoke.cyclic.app')
   .then(response => {
     if (!response.ok) {
