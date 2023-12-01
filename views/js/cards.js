@@ -3,7 +3,7 @@ const not_post = document.getElementById('no-post')
 const footer = document.querySelector('footer')
 
 
-fetch('https://lovely-worm-tux.cyclic.app/api')
+fetch('https://dark-gold-dog-yoke.cyclic.app')
   .then(response => {
     if (!response.ok) {
       throw new Error('Não foi possível obter os dados da API.');
