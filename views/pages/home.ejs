@@ -1,61 +1,66 @@
 <!DOCTYPE html>
-<html lang="pt/br">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="https://bluetilebakery.com/wp-content/uploads/2020/04/BlueTileBakeryLogo_Favicon.png">
     <%- include('../partials/head'); %>
     <link rel="stylesheet" type="text/css" href="/css/cards.css">
-
 </head>
 <body class="container">
+    <noscript>
+        <div style="text-align: center; padding: 20px; background-color: #f8f8f8; border: 1px solid #ddd; margin: 20px; border-radius: 8px;">
+            <h2 style="color: #333;">Por favor, ative o JavaScript para visualizar o conteúdo desta página.</h2>
+        </div>
+    </noscript>
 
-<header>
-    <%- include('../partials/header'); %>
-</header>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
 
-<main style="display: none;">
-    <div id="loading">
-        <div id="loading-spinner"></div>
-    </div>
+    <main style="display: none;">
+        <div id="loading">
+            <div id="loading-spinner"></div>
+        </div>
 
-    <div class="home-grid" id="grid">
-        <article class="case-not-post" id="no-post"></article>
-    <div class="main-footer">
-        <div class="news" id="root"></div>
-        
-        
-    </div>
-    <aside>
-        <%- include('../partials/aside'); %>
-    </aside>
-    
-   
-</main>
- <footer>
-            <%- include('../partials/footer'); %>
-        </footer>
-        
-    </div>
+        <div class="home-grid" id="grid">
+            <!-- Conteúdo principal aqui -->
+            <div class="main-footer">
+                <div class="news" id="root"></div>
+            </div>
+            <section style="width: auto; display:none;" id="casenopost">
+                <h2 style="color: var(--colorsystem);">Não há postagens disponíveis!</h2>
+            </section>
 
-<script type="text/javascript" src="static/js/search_post.js"></script>
-<script type="text/javascript" src="static/js/animacoes.js"></script>
-<script type="text/javascript" src="static/js/cards.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
+            <section style="width: auto;display: none" id="caseOnepost">
+            
+            </section>
+            <aside>
+                <%- include('../partials/aside'); %>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+    <script type="text/javascript" src="static/js/search_post.js"></script>
+    <script type="text/javascript" src="static/js/animacoes.js"></script>
+    <script type="text/javascript" src="static/js/cards.js"></script>
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {
-        document.body.classList.add('loaded');
+            document.body.classList.toggle('loaded', true);
+            
+            var mainElement = document.querySelector('main');
+            mainElement.style.display = 'block';
 
-        document.querySelector('main').style.display = 'block';
-
-        // Remove o elemento de loading
-        var loadingElement = document.getElementById('loading');
-        loadingElement.parentNode.removeChild(loadingElement);
-    }, 500);
+            // Remove o elemento de loading
+            var loadingElement = document.getElementById('loading');
+            loadingElement.parentNode.removeChild(loadingElement);
+        }, 500);
     });
-</script>
+    </script>
 </body>
-
-
 </html>
-

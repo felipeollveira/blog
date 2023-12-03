@@ -1,168 +1,159 @@
 const root = document.getElementById('root');
-const not_post = document.getElementById('no-post')
-const footer = document.querySelector('footer')
+const noPosts = document.getElementById('casenopost');
+const onePost = document.getElementById('caseOnepost')
+const footer = document.querySelector('footer');
 
-//api
-fetch('https://dark-gold-dog-yoke.cyclic.app')
-  .then(response => {
+// API
+const fetchCards = async () => {
+  try {
+    const response = await fetch('https://dark-gold-dog-yoke.cyclic.app');
+
     if (!response.ok) {
-      throw new Error('Não foi possível obter os dados da API.');
+      throw new Error('Failed to retrieve data from the API.');
     }
-    return response.json();
-  })
-  .then(data => { 
-    
-    //console.log(data.posts);
 
-  if(data.posts.length != 0){ 
-    for (const post of data.posts) {
-  
-        let id = post.post_id
-        let titulo = post.titulo
-        let assunto = post.assunto
-        let conclusao = post.conclusao
-        let data = post.data
-        let autor = post.autor
-        let introducao = post.introducao
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching data from the API:', error);
+    throw error; // Re-throw the error to handle it further if needed
+  }
+};
 
+const renderPost = (post) => {
+  const {
+    post_id: id,
+    titulo,
+    introducao,
+    data: postData,
+  } = post;
 
-const dataFormat = data.substring(0,4)//4 primeiros digitos (o ano)
+  const dataFormat = postData.substring(0, 4);
 
-let divCard = document.createElement("div");
-divCard.setAttribute("class", "card");
+  const divCard = document.createElement('div');
+  divCard.className = 'card';
 
-// header
-let divHeader = document.createElement("div");
-divHeader.setAttribute("class", "header");
+  const divHeader = document.createElement('div');
+  divHeader.className = 'header';
 
-// Titulo
-let aTitle = document.createElement("a");
-aTitle.setAttribute("class", "title");
-aTitle.setAttribute("href", "#");
-aTitle.textContent = titulo;
+  const aTitle = document.createElement('a');
+  aTitle.className = 'title';
+  aTitle.href = '#';
+  aTitle.textContent = titulo;
 
+  const aName = document.createElement('a');
+  aName.className = 'name';
+  aName.href = 'https://github.com/felipeollveira';
+  aName.target = '_blank';
+  aName.textContent = '';
 
-let aName = document.createElement("a");
-aName.setAttribute("class", "name");
-aName.setAttribute("href", 'https://github.com/felipeollveira');
-aName.setAttribute("target", "_blank");
-aName.textContent = '';
+  divHeader.appendChild(aTitle);
+  divHeader.appendChild(aName);
 
+  const spanImage = document.createElement('span');
+  spanImage.className = 'image';
+  divHeader.appendChild(spanImage);
 
+  divCard.appendChild(divHeader);
 
-divHeader.appendChild(aTitle);
-divHeader.appendChild(aName);
+  const pDescription = document.createElement('p');
+  pDescription.className = 'description';
 
-// Imagens
-let spanImage = document.createElement("span");
-spanImage.setAttribute("class", "image");
+  const maxLength = 156;
 
+  if (introducao.length > maxLength) {
+    const truncatedText = introducao.substring(0, maxLength);
+    const lastPeriodIndex = truncatedText.lastIndexOf('.', '!');
 
-divHeader.appendChild(spanImage);
+    if (lastPeriodIndex !== -1) {
+      pDescription.textContent =
+        truncatedText.substring(0, lastPeriodIndex + 1) + '..';
+    } else pDescription.textContent = truncatedText + '...';
+  } else pDescription.textContent = introducao;
 
-divCard.appendChild(divHeader);
+  divCard.appendChild(pDescription);
 
-// Desc
-let pDescription = document.createElement("p");
-pDescription.setAttribute("class", "description");
+  const dlPostInfo = document.createElement('div');
+  dlPostInfo.className = 'post-info';
 
-// O limite de caracteres é de 156
-const maxLength = 156;
-// se haver mais de 156 char no texto ele corta no primeiro '.'(ponto)
-// adiciona '...'(reticencias) no primeiro ponto
-if (introducao.length > maxLength) {
-  const truncatedText = introducao.substring(0, maxLength);
-  const lastPeriodIndex = truncatedText.lastIndexOf('.','!');
+  const divPublished = document.createElement('div');
+  divPublished.className = 'cr';
 
-  if (lastPeriodIndex !== -1) {
-    pDescription.textContent = truncatedText.substring(0, lastPeriodIndex + 1) + '..';
-  } else pDescription.textContent = truncatedText + '...';
-} else pDescription.textContent = introducao;
+  const dtPublished = document.createElement('p');
+  dtPublished.className = 'dt';
+  dtPublished.textContent = 'Publicado';
 
-divCard.appendChild(pDescription);
+  const ddPublished = document.createElement('p');
+  ddPublished.className = 'dd';
+  ddPublished.textContent = postData.replace('-', '/').substring(0, 7);
 
-// infs
-let dlPostInfo = document.createElement("div");
-dlPostInfo.setAttribute("class", "post-info");
+  divPublished.appendChild(dtPublished);
+  divPublished.appendChild(ddPublished);
 
-// data
-let divPublished = document.createElement("div");
-divPublished.setAttribute("class", "cr");
+  const divReadingTime = document.createElement('div');
+  divReadingTime.className = 'cr';
 
-let dtPublished = document.createElement("p");
-dtPublished.setAttribute("class", "dt");
-dtPublished.textContent = "Publicado";
+  const dtReadingTime = document.createElement('p');
+  dtReadingTime.className = 'dt';
+  dtReadingTime.textContent = 'Tempo de leitura';
 
-let ddPublished = document.createElement("p");
-ddPublished.setAttribute("class", "dd");
-ddPublished.textContent = data.replace('-','/').substring(0,7)
+  const tempoLeitura = 5;
 
-divPublished.appendChild(dtPublished);
-divPublished.appendChild(ddPublished);
+  const ddReadingTime = document.createElement('p');
+  ddReadingTime.className = 'dd';
+  ddReadingTime.textContent = tempoLeitura + ' minutos';
 
-// Tempo de leitura"
-let divReadingTime = document.createElement("div");
-divReadingTime.setAttribute("class", "cr");
+  divReadingTime.appendChild(dtReadingTime);
+  divReadingTime.appendChild(ddReadingTime);
 
-let dtReadingTime = document.createElement("p");
-dtReadingTime.setAttribute("class", "dt");
-dtReadingTime.textContent = "Tempo de leitura";
-let tempoLeitura = 5;
-let ddReadingTime = document.createElement("p");
-ddReadingTime.setAttribute("class", "dd");
-ddReadingTime.textContent = tempoLeitura + " minutos";
+  dlPostInfo.appendChild(divPublished);
+  dlPostInfo.appendChild(divReadingTime);
 
-divReadingTime.appendChild(dtReadingTime);
-divReadingTime.appendChild(ddReadingTime);
+  divCard.appendChild(dlPostInfo);
 
-dlPostInfo.appendChild(divPublished);
-dlPostInfo.appendChild(divReadingTime);
+  root.appendChild(divCard);
 
-divCard.appendChild(dlPostInfo);
-
-
-root.appendChild(divCard);
-
-
-divHeader.onclick = function() {
-  fetch('/', {
-    method: 'POST',
-    body: JSON.stringify({ titulo, id, dataFormat }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then(response => {
-      if (response.ok) {
-        // Redireciona para página HTML)
-        window.location.href = response.url;
-      } else {
-        console.error('Erro ao enviar a solicitação: ', response.status);
-      }
+  divHeader.onclick = function () {
+    fetch('/', {
+      method: 'POST',
+      body: JSON.stringify({ titulo, id, dataFormat }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
-    
-    .catch(error => {
-      console.error('Erro ao enviar a solicitação: ', error);
-    });
+      .then(response => {
+        if (response.ok) {
+          window.location.href = response.url;
+        } else {
+          console.error('Error sending request:', response.status);
+        }
+      })
+      .catch(error => {
+        console.error('Error sending request:', error);
+      });
+  };
 };
 
-};
+// Fetch and render posts
+fetchCards()
+  .then(data => {
+    if (data.posts.length === 0) {
+      noPosts.style.display = 'flex'
 
+      if (data.posts.length === 1) {
+        onePost.style.width = '500px';
+        not_post.style.display = 'none';
+        onePost.style.display = 'flex'
+      }
 
-if (data.posts.length === 1) {
-  not_post.style.width = '40' + '%';
-  not_post.style.display = 'flex';
-}
+    } else {
+        noPosts.display = 'none';
+      for (const post of data.posts) {
+        renderPost(post);
+      }
 
-}else{
-  
-
-  
-}
-
+    }
   })
   .catch(error => {
     console.error(error);
   });
-
-

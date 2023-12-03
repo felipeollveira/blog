@@ -13,11 +13,11 @@
 
 .news {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: auto auto;
   gap: 10px;
   min-width: 100px;
   justify-content: center; 
-  grid-template-rows: reverse;
+  grid-template-rows: reverse; 
 
 }
 
@@ -30,8 +30,8 @@
 .card {
   display: grid;
   grid-template-rows: repeat(3, 1fr); 
-  width: auto;
   height: 200px;
+  width: auto;
   position: relative;
   overflow: hidden;
   border: 1px solid var(--cor-borda);
@@ -125,6 +125,23 @@
   line-height: 1rem;
   color: rgba(107, 114, 128,1);
 }
+
+
+@media screen and (min-width: 769px) {
+  .news{
+
+    display: grid;
+    grid-template-columns: 50% 50%;
+    flex-direction: column;
+
+  }
+  .card{
+    min-width: 50%;
+  }
+
+
+}
+
 
 
 @media screen and (min-width: 641px) and (max-width: 768px) {
