@@ -15,7 +15,7 @@
   display: grid;
   grid-template-columns: auto auto;
   gap: 10px;
-  min-width: 100px;
+  width: 100%;
   justify-content: center; 
   grid-template-rows: reverse; 
 
@@ -31,7 +31,7 @@
   display: grid;
   grid-template-rows: repeat(3, 1fr); 
   height: 200px;
-  width: auto;
+ 
   position: relative;
   overflow: hidden;
   border: 1px solid var(--cor-borda);
@@ -129,9 +129,8 @@
 
 @media screen and (min-width: 769px) {
   .news{
-
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: auto auto;
     flex-direction: column;
 
   }
