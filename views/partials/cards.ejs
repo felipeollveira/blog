@@ -1,0 +1,39 @@
+<div class="news" id="root">
+	<div id="loading">
+		<div id="loading-spinner"></div>
+	</div>
+</div>
+  
+<script type="text/javascript" src="static/js/cards.js"></script>
+    
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+	  (function() {
+		document.body.classList.toggle('loaded', true);
+		const root = document.getElementById('root');
+		let loadingElement = document.getElementById('loading');
+		const notify = document.getElementById('notify');
+		const aside = document.querySelector('aside')
+	
+		if (!root || root.children.length === 0) {
+		  
+		  loadingElement.classList.add('fade-out');
+
+		  setTimeout(function() {
+			loadingElement.parentNode.removeChild(loadingElement);
+			notify.textContent = 'Não há postagens disponíveis!';
+		  });
+
+		} else {
+
+		  loadingElement.parentNode.removeChild(loadingElement);
+		}
+	  })();
+	});
+	</script>
+
+ 
+
+  
+ 
+ 

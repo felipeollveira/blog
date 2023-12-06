@@ -22,7 +22,6 @@
      
 
         <div class="home-grid" id="grid">
-            <!-- Conteúdo principal aqui -->
             <div class="main-footer">
                 <div class="news" id="root"></div>
             </div>
@@ -30,6 +29,9 @@
                 <h2 style="color: var(--colorsystem);" id="notify"></h2>
             </section>
 
+            <div>
+                <%- include('../partials/cards'); %>
+            </div>
             <section style="width: auto;display: none" id="caseOnepost">
             
             </section>   
@@ -41,51 +43,16 @@
             </aside>
         </div>
         
-        <div id="loading">
-                <div id="loading-spinner"></div>
-            </div>
+      
     </main>
 
     <footer>
         <%- include('../partials/footer'); %>
     </footer>
     <script async type="text/javascript" src="static/js/api/api.js"></script>
-
     <script type="text/javascript" src="static/js/search_post.js"></script>
     <script type="text/javascript" src="static/js/animacoes.js"></script>
-    <script type="text/javascript" src="static/js/cards.js"></script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          (function() {
-            document.body.classList.toggle('loaded', true);
-            const root = document.getElementById('root');
-            let loadingElement = document.getElementById('loading');
-            const notify = document.getElementById('notify');
-            const aside = document.querySelector('aside')
+  
         
-            if (!root || root.children.length === 0) {
-              
-              loadingElement.classList.add('fade-out');
-
-              setTimeout(function() {
-                loadingElement.parentNode.removeChild(loadingElement);
-                notify.textContent = 'Não há postagens disponíveis!';
-              },);
-   
-            } else {
-
-              loadingElement.parentNode.removeChild(loadingElement);
-            }
-          })();
-        });
-        </script>
-        
-
-
-
-
-
-    </script>
 </body>
 </html>
