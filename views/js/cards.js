@@ -3,20 +3,24 @@ const noPosts = document.getElementById('casenopost');
 const onePost = document.getElementById('caseOnepost')
 const footer = document.querySelector('footer');
 
+const urlChave = ' https://dark-gold-dog-yoke.cyclic.app';
+
 // API
 const fetchCards = async () => {
-  try {
-    const response = await fetch('https://dark-gold-dog-yoke.cyclic.app');
+    const cache = await caches.open('data-cache');
 
-    if (!response.ok) {
-      throw new Error('Failed to retrieve data from the API.');
+    try{
+    const cachedResponse = await cache.match(urlChave);
+  
+    if (!cachedResponse) {
+      throw new Error('Não foi possível obter os dados do cache.');
     }
-
-    const data = await response.json();
+  
+    const data = await cachedResponse.json();
     return data;
   } catch (error) {
     console.error('Error fetching data from the API:', error);
-    throw error; // Re-throw the error to handle it further if needed
+    throw error;
   }
 };
 
@@ -116,7 +120,7 @@ const renderPost = (post) => {
   divHeader.onclick = function () {
     fetch('/', {
       method: 'POST',
-      body: JSON.stringify({ titulo, id, dataFormat }),
+      body: JSON.stringify({ titulo, dataFormat }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -134,7 +138,6 @@ const renderPost = (post) => {
   };
 };
 
-// Fetch and render posts
 fetchCards()
   .then(data => {
     if (data.posts.length === 0) {

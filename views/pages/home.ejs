@@ -18,49 +18,74 @@
         <%- include('../partials/header'); %>
     </header>
 
-    <main style="display: none;">
-        <div id="loading">
-            <div id="loading-spinner"></div>
-        </div>
+    <main style="display: block;">
+     
 
         <div class="home-grid" id="grid">
             <!-- Conteúdo principal aqui -->
             <div class="main-footer">
                 <div class="news" id="root"></div>
             </div>
-            <section style="width: auto; display:none;" id="casenopost">
-                <h2 style="color: var(--colorsystem);">Não há postagens disponíveis!</h2>
+            <section style=" width: 100%; display:none;" id="casenopost">
+                <h2 style="color: var(--colorsystem);" id="notify"></h2>
             </section>
 
             <section style="width: auto;display: none" id="caseOnepost">
             
-            </section>
+            </section>   
+            
+            
+
             <aside>
                 <%- include('../partials/aside'); %>
             </aside>
         </div>
+        
+        <div id="loading">
+                <div id="loading-spinner"></div>
+            </div>
     </main>
 
     <footer>
         <%- include('../partials/footer'); %>
     </footer>
+    <script async type="text/javascript" src="static/js/api/api.js"></script>
 
     <script type="text/javascript" src="static/js/search_post.js"></script>
     <script type="text/javascript" src="static/js/animacoes.js"></script>
     <script type="text/javascript" src="static/js/cards.js"></script>
+    
     <script>
-       document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
+        document.addEventListener('DOMContentLoaded', function() {
+          (function() {
             document.body.classList.toggle('loaded', true);
-            
-            var mainElement = document.querySelector('main');
-            mainElement.style.display = 'block';
+            const root = document.getElementById('root');
+            let loadingElement = document.getElementById('loading');
+            const notify = document.getElementById('notify');
+            const aside = document.querySelector('aside')
+        
+            if (!root || root.children.length === 0) {
+              
+              loadingElement.classList.add('fade-out');
 
-            // Remove o elemento de loading
-            var loadingElement = document.getElementById('loading');
-            loadingElement.parentNode.removeChild(loadingElement);
-        }, 500);
-    });
+              setTimeout(function() {
+                loadingElement.parentNode.removeChild(loadingElement);
+                notify.textContent = 'Não há postagens disponíveis!';
+              },);
+   
+            } else {
+
+              loadingElement.parentNode.removeChild(loadingElement);
+            }
+          })();
+        });
+        </script>
+        
+
+
+
+
+
     </script>
 </body>
 </html>

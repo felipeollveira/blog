@@ -1,15 +1,4 @@
-.case-not-post{
-  width: 90vh;
-  display: none;
-}
 
-.no-post{
-  color: rgb(37, 37, 37);
-  font-size: 30pt;
-  font-weight: 400;
-  text-align: right;
-
-}
 
 .news {
   display: grid;

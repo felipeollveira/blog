@@ -1,3 +1,5 @@
+const urlChave = ' https://dark-gold-dog-yoke.cyclic.app';
+
 const obterTituloDaURL = () => {
   const currentURL = window.location.href;
   const urlParts = currentURL.split('/');
@@ -7,15 +9,18 @@ const obterTituloDaURL = () => {
 
 // Função para buscar o post na API na cyclic
 const buscarPostNaAPI = async (tituloDoPost) => {
-  try {
+  const cache = await caches.open('data-cache');
 
-    const response = await fetch('https://dark-gold-dog-yoke.cyclic.app');
-    if (!response.ok) {
-      throw new Error('Não foi possível obter os dados da API.');
-    }
+  try{
+  const cachedResponse = await cache.match(urlChave);
 
-    const data = await response.json();
-    const post = data.posts.find(post => post.titulo === tituloDoPost);
+  if (!cachedResponse) {
+    throw new Error('Não foi possível obter os dados do cache.');
+  }
+
+  const data = await cachedResponse.json();
+  const post = data.posts.find(post => post.titulo === tituloDoPost);
+
 
     if (post) {
 
