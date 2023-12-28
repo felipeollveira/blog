@@ -12,7 +12,6 @@ const obterDados = async () => {
 
     // Escrever o arquivo JSON com os dados do fallback
     await escreverArquivoJSON(fallbackData, caminhoArquivo);
-    //A minha familia nasceu para vencer
     console.log('Arquivo JSON criado com sucesso.');
 
     return fallbackData;
