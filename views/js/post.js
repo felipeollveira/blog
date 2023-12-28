@@ -1,96 +1,116 @@
-const urlChave = ' https://dark-gold-dog-yoke.cyclic.app';
+// Constantes para URLs
+const urlApi = 'https://db-pubs.vercel.app';
+const urlDadosJson = '../../src/data/dados.json';
 
+
+// Função para obter o título da URL
 const obterTituloDaURL = () => {
-  const currentURL = window.location.href;
-  const urlParts = currentURL.split('/');
-  const titulo = urlParts[urlParts.length - 1];
-  return decodeURIComponent(titulo);
+  const urlAtual = window.location.href;
+  const partesUrl = urlAtual.split('/');
+  return decodeURIComponent(partesUrl[partesUrl.length - 1]);
 };
 
-// Função para buscar o post na API na cyclic
+// Função para buscar dados do post na API
 const buscarPostNaAPI = async (tituloDoPost) => {
-  const cache = await caches.open('data-cache');
+  try {
+    const principalJSON = await fetch(urlDadosJson);
 
-  try{
-  const cachedResponse = await cache.match(urlChave);
-
-  if (!cachedResponse) {
-    throw new Error('Não foi possível obter os dados do cache.');
-  }
-
-  const data = await cachedResponse.json();
-  const post = data.posts.find(post => post.titulo === tituloDoPost);
-
-
-    if (post) {
-
-      //  estrutura HTML 
-      const body = document.getElementById('container');
-
-      // Criação da estrutura HTML
-      const dataPublicacao = document.getElementById("dataPub");
-      dataPublicacao.textContent = post.data.substring(0, 10);
-
-      const header = document.getElementById("nomeTitulo");
-      header.className = "page-header";
-      header.textContent = post.titulo;
-      
-      const img = document.getElementById("capa");
-
-      if (post.images === null || post.images.trim() === '') {
-        img.style.display = 'none'; 
-      } else {
-        img.style.display = 'block'; 
-        img.src = post.images;
-      }
-      
-      img.src = post.images;
-      
-
-      const introducaoFormatada = post.introducao
-      const desenvolvimentoFormatado = post.desenvolvimento
-      const conclusaoFormatada = post.conclusao
-      
-      
-      const introductionSection = criarSecao("section introduction", introducaoFormatada);
-      const developmentSection = criarSecao("section development", desenvolvimentoFormatado);
-      const conclusionSection = criarSecao("section conclusion", conclusaoFormatada);
-      
-      //  seções ao corpo da página
-      body.insertBefore(conclusionSection, body.firstChild);
-      body.insertBefore(developmentSection, body.firstChild);
-      body.insertBefore(introductionSection, body.firstChild);
-
-      
-      
-    } else {
-      console.log('Postagem não encontrada');
+    if (!principalJSON.ok) {
+      console.error('Erro ao buscar JSON principal:', principalJSON.status);
+      throw new Error(`Falha JSON principal ${urlDadosJson} - ${principalJSON.status}`);
     }
-  } catch (error) {
-    console.error(error);
+
+    const dados = await principalJSON.json();
+
+    const post = dados.posts.find(post => post.titulo === tituloDoPost);
+
+    if (!post) {
+      console.error(`Post com título '${tituloDoPost}' não encontrado.`);
+      throw new Error(`Post com título '${tituloDoPost}' não encontrado.`);
+    }
+
+    return post;
+
+  } catch (erro) {
+      // Tentativa de fallback para outra fonte de dados
+    try {
+      const [respostaFallback, dadosFallback] = await Promise.all([
+        fetch(urlApi),
+        fetch(urlApi).then(resposta => resposta.json())
+      ]);
+
+      if (!respostaFallback.ok) {
+        throw new Error(`Erro de rede - ${respostaFallback.status}`);
+      }
+
+     const post = dadosFallback.posts.find(post => post.titulo === tituloDoPost);
+  
+
+      if (!post) {
+        throw new Error(`Post com título '${tituloDoPost}' não encontrado no fallback.`);
+      }
+
+      return post;
+    } catch (erroFallback) {
+      console.error('Erro no fallback:', erroFallback.message);
+      throw erroFallback;
+    }
   }
+};
+
+// Função para renderizar o conteúdo do post
+const renderizarPost = (post) => {
+  const { titulo, introducao, data: dataPostagem, images, desenvolvimento, conclusao } = post;
+
+  // Elementos HTML
+  const corpoPagina = document.getElementById('container');
+  const dataPublicacao = document.getElementById("dataPub");
+  const cabecalho = document.getElementById("nomeTitulo");
+  const imagem = document.getElementById("capa");
+
+  // Configurar conteúdo e propriedades de exibição
+  dataPublicacao.textContent = dataPostagem.substring(0, 10);
+  cabecalho.className = "page-header";
+  cabecalho.textContent = titulo;
+
+  if (!images || images.trim() === '') {
+    imagem.style.display = 'none';
+  } else {
+    imagem.style.display = 'block';
+    imagem.src = images;
+  }
+
+  // Formatar e criar seções HTML
+  const secaoIntroducao = criarSecao("section introduction", introducao);
+  const secaoDesenvolvimento = criarSecao("section development", desenvolvimento);
+  const secaoConclusao = criarSecao("section conclusion", conclusao);
+
+  // Adicionar seções ao corpo da página
+  corpoPagina.insertBefore(secaoConclusao, corpoPagina.firstChild);
+  corpoPagina.insertBefore(secaoDesenvolvimento, corpoPagina.firstChild);
+  corpoPagina.insertBefore(secaoIntroducao, corpoPagina.firstChild);
 };
 
 // Função auxiliar para criar seção HTML
-const criarSecao = (className, conteudo) => {
-  const section = document.createElement("section");
-  section.className = className;
-  const pSection = createElementWithClass("p", "section-content");
-  section.appendChild(pSection);
-  pSection.innerHTML = sanitizeHTML(formatTextWithAsterisks(conteudo));
-  return section;
+const criarSecao = (classe, conteudo) => {
+  const secao = document.createElement("section");
+  secao.className = classe;
+  const paragrafo = createElementWithClass("p", "section-content");
+  secao.appendChild(paragrafo);
+  paragrafo.innerHTML = sanitizarHTML(formatarTextoComAsteriscos(conteudo));
+  return secao;
 };
 
 // Função auxiliar para criar elemento com classe
-const createElementWithClass = (tag, className, content) => {
-  const element = document.createElement(tag);
-  element.className = className;
-  element.textContent = content;
-  return element;
+const createElementWithClass = (tag, classe, conteudo) => {
+  const elemento = document.createElement(tag);
+  elemento.className = classe;
+  elemento.textContent = conteudo;
+  return elemento;
 };
 
 // Função para formatar o texto com asteriscos, colchetes e hashtags
-const formatTextWithAsterisks = (text) => {
+const formatarTextoComAsteriscos = (text) => {
   const textSplit = text.split('');
   let formattedText = [text];
 
@@ -113,15 +133,30 @@ const formatTextWithAsterisks = (text) => {
   return finalFormattedText;
 };
 
-
 // Função para remover tags HTML não permitidas
-const sanitizeHTML = (text) => {
-  const textWithLineBreaks = text.replace(/\/n/g, '<br>');
-  const sanitizedText = textWithLineBreaks.replace(/<(?!\/?(span|article|a|br))[^>]*>/g, '');
-  return sanitizedText;
+const sanitizarHTML = (texto) => {
+  const textoComQuebrasDeLinha = texto.replace(/\/n/g, '<br>');
+  const textoSanitizado = textoComQuebrasDeLinha.replace(/<(?!\/?(span|article|a|br))[^>]*>/g, '');
+  return textoSanitizado;
 };
 
-
-// Chama as funções
+// Execução inicial
 const tituloDoPost = obterTituloDaURL();
-buscarPostNaAPI(tituloDoPost);
+buscarPostNaAPI(tituloDoPost)
+  .then(post => {
+    document.getElementById('loading').style.display = 'none';
+    if (post) {
+      document.body.classList.add('loaded');
+      document.getElementById('pub').style.display = 'block';
+
+      renderizarPost(post);
+    } else {
+      console.error('Os dados do post não foram carregados corretamente.');
+    }
+  })
+  .catch(erro => {
+    // Oculta indicador de loading em caso de erro
+    document.getElementById('loading').style.display = 'none';
+    
+    console.error(erro);
+  });

@@ -1,36 +1,56 @@
-const root = document.getElementById('root');
+  const root = document.getElementById('root');
 const noPosts = document.getElementById('casenopost');
-const onePost = document.getElementById('caseOnepost')
-const footer = document.querySelector('footer');
+const onePost = document.getElementById('caseOnepost');
 
-const urlChave = ' https://dark-gold-dog-yoke.cyclic.app';
+const urlDoJSON = './data/dados.json';
 
-// API
 const fetchCards = async () => {
-    const cache = await caches.open('data-cache');
+  try {
+    const response = await fetch(urlDoJSON);
 
-    try{
-    const cachedResponse = await cache.match(urlChave);
-  
-    if (!cachedResponse) {
-      throw new Error('Não foi possível obter os dados do cache.');
+    if (!response.ok) {
+      throw new Error(`Erro ao buscar dados - ${response.status}`);
     }
-  
-    const data = await cachedResponse.json();
+
+    const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching data from the API:', error);
-    throw error;
+    console.error('Erro ao buscar dados:', error.message);
+
+    // Fallback para outra fonte de dados
+    try {
+      const fallbackResponse = await fetch('https://db-pubs.vercel.app');
+      
+      if (fallbackResponse.ok) {
+        const fallbackData = await fallbackResponse.json();
+
+        // Aqui você pode manipular os dados do fallback antes de retorná-los
+        const modifiedFallbackData = {
+          ...fallbackData,
+          additionalProperty: 'value', // Adicione propriedades ou modifique conforme necessário
+        };
+
+        return modifiedFallbackData;
+      } else {
+        throw new Error(`Erro de rede - ${fallbackResponse.status}`);
+      }
+    } catch (fallbackError) {
+      console.error('Erro no fallback:', fallbackError.message);
+      throw fallbackError;
+    }
   }
 };
 
+
+
 const renderPost = (post) => {
   const {
-    post_id: id,
+    id,
     titulo,
     introducao,
     data: postData,
   } = post;
+
 
   const dataFormat = postData.substring(0, 4);
 
@@ -141,20 +161,16 @@ const renderPost = (post) => {
 fetchCards()
   .then(data => {
     if (data.posts.length === 0) {
-      noPosts.style.display = 'flex'
-
-      if (data.posts.length === 1) {
-        onePost.style.width = '500px';
-        not_post.style.display = 'none';
-        onePost.style.display = 'flex'
-      }
-
+      noPosts.style.display = 'flex';
+    } else if (data.posts.length === 1) {
+      onePost.style.width = '500px';
+      not_post.style.display = 'none';
+      onePost.style.display = 'flex';
     } else {
-        noPosts.display = 'none';
+      noPosts.style.display = 'none';
       for (const post of data.posts) {
         renderPost(post);
       }
-
     }
   })
   .catch(error => {
