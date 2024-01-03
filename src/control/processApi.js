@@ -2,7 +2,7 @@ const fs = require('fs').promises;
 const path = require('path');
 
 const urlChave = 'https://db-pubs.vercel.app';
-const caminhoArquivo = path.join('views/js/data/dados.json');
+const caminhoArquivo = path.join('views/js/api/data/dados.json');
 
 const obterDados = async () => {
   try {
@@ -20,7 +20,6 @@ const obterDados = async () => {
     throw error;
   }
 };
-
 const escreverArquivoJSON = async (dados, caminhoArquivo) => {
   const jsonData = JSON.stringify(dados, null, 2);
 

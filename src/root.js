@@ -2,14 +2,13 @@ const express = require('express')
 const root = express();
 const bodyParser = require('body-parser');
 const path = require('path');
-const obterDados = require('./processApi');
+const obterDados = require('./control/processApi');
 root.set('view engine','ejs')
 // PROCURANDO PELA PASTA VIEWS no VERCEL
 root.set('views', path.join(__dirname, '..', 'views'));
 
 root.use(bodyParser.urlencoded({ extended: false }));
 root.use(bodyParser.json());
-
 
 
 root.get('/', async (req, res) => {

@@ -1,35 +1,32 @@
-  const root = document.getElementById('root');
+const root = document.getElementById('root');
 const noPosts = document.getElementById('casenopost');
 const onePost = document.getElementById('caseOnepost');
 
-const urlDoJSON = './data/dados.json';
+const apiurl = 'https://db-pubs.vercel.app';
+
 
 const fetchCards = async () => {
   try {
-    const response = await fetch(urlDoJSON);
+    const cache = await caches.open('data-cache');
+    const cachedResponse = await cache.match(apiurl);
 
-    if (!response.ok) {
-      throw new Error(`Erro ao buscar dados - ${response.status}`);
-    }
+    let data = cachedResponse ? await cachedResponse.json() : null;
 
-    const data = await response.json();
     return data;
   } catch (error) {
     console.error('Erro ao buscar dados:', error.message);
-
     // Fallback para outra fonte de dados
     try {
-      const fallbackResponse = await fetch('https://db-pubs.vercel.app');
+      const fallbackResponse = await fetch(apiurl);
       
       if (fallbackResponse.ok) {
         const fallbackData = await fallbackResponse.json();
 
-        // Aqui você pode manipular os dados do fallback antes de retorná-los
         const modifiedFallbackData = {
           ...fallbackData,
           additionalProperty: 'value', // Adicione propriedades ou modifique conforme necessário
         };
-
+        
         return modifiedFallbackData;
       } else {
         throw new Error(`Erro de rede - ${fallbackResponse.status}`);
@@ -168,7 +165,7 @@ fetchCards()
       onePost.style.display = 'flex';
     } else {
       noPosts.style.display = 'none';
-      for (const post of data.posts) {
+      for (const post of data.posts.posts) {
         renderPost(post);
       }
     }

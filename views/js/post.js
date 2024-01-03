@@ -12,17 +12,14 @@ const obterTituloDaURL = () => {
 
 // Função para buscar dados do post na API
 const buscarPostNaAPI = async (tituloDoPost) => {
+  
   try {
-    const principalJSON = await fetch(urlDadosJson);
+    const cache = await caches.open('data-cache');
+    const cachedResponse = await cache.match(urlApi);
 
-    if (!principalJSON.ok) {
-      console.error('Erro ao buscar JSON principal:', principalJSON.status);
-      throw new Error(`Falha JSON principal ${urlDadosJson} - ${principalJSON.status}`);
-    }
+    let dados = cachedResponse ? await cachedResponse.json() : null;
 
-    const dados = await principalJSON.json();
-
-    const post = dados.posts.find(post => post.titulo === tituloDoPost);
+    const post = dados.posts.posts.find(post => post.titulo === tituloDoPost);
 
     if (!post) {
       console.error(`Post com título '${tituloDoPost}' não encontrado.`);
