@@ -1,41 +1,44 @@
-const fs = require('fs').promises;
-const path = require('path');
 
-const urlChave = 'https://db-pubs.vercel.app';
-const caminhoArquivo = path.join('views/js/data/dados.json');
 
-const obterDados = async () => {
+const urlApi = 'https://db-pubs.vercel.app';
+const cacheName = 'data-cache';
+const urlJson = './data/dados.json'
+
+
+const fetchAndCacheData = async () => {
   try {
-    const fallbackResponse = await fetch(urlChave);
+    // Abrir o cache
+    const cache = await caches.open(cacheName);
 
-    if (!fallbackResponse.ok) {
-      throw new Error(`Erro ao buscar dados - ${fallbackResponse.status}`);
+    // Verificar se os dados já estão no cache
+    const cachedResponse = await cache.match(new Request(urlApi));
+
+    if (cachedResponse) {
+      const data = await cachedResponse.json();
+      console.log('Dados recuperados do cache (data-cache).');
+      return data;
     }
 
-    const fallbackData = await fallbackResponse.json();
-    escreverArquivoJSON(fallbackData, caminhoArquivo)
-    return fallbackData;
+    // Se os dados não estão no cache, buscar da API
+    const response = await fetch(urlApi);
+
+    if (!response.ok) {
+      throw new Error(`Erro ao buscar dados - ${response.status}`);
+    }
+
+    // Converter a resposta em JSON
+    const data = await response.json();
+
+    // Armazenar a resposta da API no cache
+    await cache.put(new Request(urlApi), new Response(JSON.stringify(data)));
+
+    console.log('Dados da API armazenados no cache (data-cache) com sucesso.');
+    return data;
   } catch (error) {
-    console.error('Erro ao buscar ou escrever dados:', error);
+    console.error('Erro ao buscar ou armazenar dados:', error.message);
     throw error;
   }
 };
 
-const escreverArquivoJSON = async (dados, caminhoArquivo) => {
-  const jsonData = JSON.stringify(dados, null, 2);
-
-  // Criar o diretório se não existir
-  const diretorio = path.dirname(caminhoArquivo);
-  await fs.mkdir(diretorio, { recursive: true });
-
-  try {
-
-    await fs.writeFile(caminhoArquivo, jsonData, 'utf8');
-    console.log('Arquivo JSON criado/atualizado com sucesso.');
-  } catch (error) {
-    console.error('Erro ao escrever no arquivo JSON:', error.message);
-    throw error;
-  }
-};
-
-module.exports = obterDados;
+// Chame a função para buscar e armazenar os dados no cache
+fetchAndCacheData();
