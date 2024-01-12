@@ -2,30 +2,19 @@
   "posts": {
     "posts": [
       {
-        "_id": "658b77522b4ac8874f3d80d6",
-        "titulo": "Exemplo de Documento 1",
-        "introducao": "Este é o conteúdo de introdução.",
-        "desenvolvimento": "Aqui está o desenvolvimento do documento.",
-        "conclusao": "Finalizando com a conclusão.",
-        "data": "2023-12-30T12:00:00.000Z",
-        "autor": "user123",
-        "__v": 0
-      },
-      {
-        "_id": "658b77522b4ac8874f3d80d7",
-        "titulo": "Exemplo de Documento 2",
-        "introducao": "Conteúdo introdutório para o segundo documento.",
-        "desenvolvimento": "Desenvolvimento do segundo documento.",
-        "conclusao": "Conclusão do segundo documento.",
-        "data": "2023-12-31T15:30:00.000Z",
-        "autor": "user456",
-        "__v": 0
+        "_id": "6599f1c7b046e426357def35",
+        "titulo": "Primeira publicação",
+        "introducao": "313",
+        "desenvolvimento": "131313",
+        "conclusao": "3113",
+        "data": "2024-01-07T00:35:18.283Z",
+        "autor": "felipeoliveira",
+        "images": null
       }
     ],
     "version": {
-      "_id": {
-        "vr": "0"
-      }
+      "_id": "6599ea7cfb460c6740d9c360",
+      "v": 0.1
     }
   }
 }

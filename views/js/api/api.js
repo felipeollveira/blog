@@ -7,7 +7,10 @@ const urlJson = './data/dados.json'
 
 const fetchAndCacheData = async () => {
   try {
-    // Abrir o cache
+    // Limpar a cache existente
+    await limparCache();
+
+    // Abrir um novo cache
     const cache = await caches.open(cacheName);
 
     // Verificar se os dados já estão no cache
@@ -40,5 +43,17 @@ const fetchAndCacheData = async () => {
   }
 };
 
-// Chame a função para buscar e armazenar os dados no cache
+// Função para limpar a cache
+const limparCache = async () => {
+  try {
+    const cache = await caches.open(cacheName);
+    await cache.delete(urlApi);
+    console.log('Cache limpa com sucesso.');
+  } catch (error) {
+    console.error('Erro ao limpar o cache:', error);
+  }
+};
+
+// Chama a função para buscar e armazenar dados
 fetchAndCacheData();
+

@@ -4,7 +4,6 @@ const onePost = document.getElementById('caseOnepost');
 
 const apiurl = 'https://db-pubs.vercel.app';
 
-
 const fetchCards = async () => {
   try {
     const cache = await caches.open('data-cache');
@@ -15,7 +14,7 @@ const fetchCards = async () => {
     return data;
   } catch (error) {
     console.error('Erro ao buscar dados:', error.message);
-    // Fallback para outra fonte de dados
+   
     try {
       const fallbackResponse = await fetch(apiurl);
       
@@ -24,7 +23,7 @@ const fetchCards = async () => {
 
         const modifiedFallbackData = {
           ...fallbackData,
-          additionalProperty: 'value', // Adicione propriedades ou modifique conforme necessário
+         // additionalProperty: 'value'
         };
         
         return modifiedFallbackData;
