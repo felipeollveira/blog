@@ -10,7 +10,7 @@ const fetchCards = async () => {
     const cachedResponse = await cache.match(apiurl);
 
     let data = cachedResponse ? await cachedResponse.json() : null;
-
+ 
     return data;
   } catch (error) {
     console.error('Erro ao buscar dados:', error.message);
@@ -25,7 +25,7 @@ const fetchCards = async () => {
           ...fallbackData,
          // additionalProperty: 'value'
         };
-        
+
         return modifiedFallbackData;
       } else {
         throw new Error(`Erro de rede - ${fallbackResponse.status}`);
@@ -154,21 +154,36 @@ const renderPost = (post) => {
   };
 };
 
+const showNoPosts = () => {
+  noPosts.style.display = 'flex';
+};
+
+
+
+const hideNoPosts = () => {
+  noPosts.style.display = 'none';
+};
+
+const renderPosts = (posts) => {
+  for (const post of posts) {
+      renderPost(post);
+   
+  }
+};
+
 fetchCards()
   .then(data => {
-    if (data.posts.length === 0) {
-      noPosts.style.display = 'flex';
-    } else if (data.posts.length === 1) {
-      onePost.style.width = '500px';
-      not_post.style.display = 'none';
-      onePost.style.display = 'flex';
-    } else {
-      noPosts.style.display = 'none';
-      for (const post of data.posts.posts) {
-        renderPost(post);
-      }
+    const { posts } = data;
+
+    if (posts.length === 0) {
+      showNoPosts();
+    } 
+    else {
+      hideNoPosts();
+      renderPosts(posts);
     }
   })
   .catch(error => {
-    console.error(error);
+    console.error('Erro ao buscar dados:', error.message);
   });
+

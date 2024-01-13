@@ -38,8 +38,8 @@ const fetchAndCacheData = async () => {
     console.log('Dados da API armazenados no cache (data-cache) com sucesso.');
     return data;
   } catch (error) {
+    data = []
     console.error('Erro ao buscar ou armazenar dados:', error.message);
-    throw error;
   }
 };
 

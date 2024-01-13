@@ -1,7 +1,6 @@
 
 .menu{
     display: block;
-
 }
 
 
@@ -107,6 +106,12 @@ blockquote {
     padding: 2px;
     line-height: 12px;
     transition: text-decoration 0.3s;
+}
+a{
+    color: none;
+    text-decoration: none;
+    border: none;
+    color: var(--colorsystem);
 }
 
 .aside li:hover {
