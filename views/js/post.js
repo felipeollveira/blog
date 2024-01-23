@@ -57,24 +57,24 @@ const buscarPostNaAPI = async (tituloDoPost) => {
 
 // Função para renderizar o conteúdo do post
 const renderizarPost = (post) => {
-  const { titulo, introducao, data: dataPostagem, images, desenvolvimento, conclusao } = post;
+  const { titulo, introducao, data: dataPostagem, imagem, desenvolvimento, conclusao } = post;
 
   // Elementos HTML
   const corpoPagina = document.getElementById('container');
   const dataPublicacao = document.getElementById("dataPub");
   const cabecalho = document.getElementById("nomeTitulo");
-  const imagem = document.getElementById("capa");
+  const imagemHTML = document.getElementById("capa");
 
   // Configurar conteúdo e propriedades de exibição
   dataPublicacao.textContent = dataPostagem.substring(0, 10);
   cabecalho.className = "page-header";
   cabecalho.textContent = titulo;
 
-  if (!images || images.trim() === '') {
-    imagem.style.display = 'none';
+  if (!imagem || imagem.trim() === '') {
+    imagemHTML.style.display = 'none';
   } else {
-    imagem.style.display = 'block';
-    imagem.src = images;
+    imagemHTML.style.display = 'block';
+    imagemHTML.src = imagem;
   }
 
   // Formatar e criar seções HTML
