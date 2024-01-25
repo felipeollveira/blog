@@ -1,8 +1,6 @@
-
-
 const urlApi = 'https://db-pubs.vercel.app';
 const cacheName = 'data-cache';
-const urlJson = './data/dados.json'
+
 
 
 const fetchAndCacheData = async () => {
@@ -19,6 +17,7 @@ const fetchAndCacheData = async () => {
     if (cachedResponse) {
       const data = await cachedResponse.json();
       console.log('Dados recuperados do cache (data-cache).');
+     
       return data;
     }
 
@@ -34,12 +33,13 @@ const fetchAndCacheData = async () => {
 
     // Armazenar a resposta da API no cache
     await cache.put(new Request(urlApi), new Response(JSON.stringify(data)));
+    
 
     console.log('Dados da API armazenados no cache (data-cache) com sucesso.');
     return data;
   } catch (error) {
-    data = []
     console.error('Erro ao buscar ou armazenar dados:', error.message);
+    throw error;
   }
 };
 
@@ -55,5 +55,12 @@ const limparCache = async () => {
 };
 
 // Chama a função para buscar e armazenar dados
-fetchAndCacheData();
+(async () => {
+  try {
+    await fetchAndCacheData();
+  } catch (error) {
+    // Lidar com o erro conforme necessário
+  }
+})();
+
 

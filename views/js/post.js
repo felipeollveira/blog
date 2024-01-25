@@ -19,7 +19,7 @@ const buscarPostNaAPI = async (tituloDoPost) => {
 
     let dados = cachedResponse ? await cachedResponse.json() : null;
 
-    const post = dados.posts.posts.find(post => post.titulo === tituloDoPost);
+    const post = dados.posts.find(post => post.titulo === tituloDoPost);
 
     if (!post) {
       console.error(`Post com título '${tituloDoPost}' não encontrado.`);
@@ -29,6 +29,7 @@ const buscarPostNaAPI = async (tituloDoPost) => {
     return post;
 
   } catch (erro) {
+    console.log('Ativando fallback:', erro)
       // Tentativa de fallback para outra fonte de dados
     try {
       const [respostaFallback, dadosFallback] = await Promise.all([

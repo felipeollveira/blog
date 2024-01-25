@@ -10,11 +10,12 @@ const fetchCards = async () => {
     const cachedResponse = await cache.match(apiurl);
 
     let data = cachedResponse ? await cachedResponse.json() : null;
- 
+    
     return data;
   } catch (error) {
     console.error('Erro ao buscar dados:', error.message);
    
+    // segunda opcao: buscar na api
     try {
       const fallbackResponse = await fetch(apiurl);
       
@@ -23,7 +24,6 @@ const fetchCards = async () => {
 
         const modifiedFallbackData = {
           ...fallbackData,
-         // additionalProperty: 'value'
         };
 
         return modifiedFallbackData;
@@ -41,10 +41,10 @@ const fetchCards = async () => {
 
 const renderPost = (post) => {
   const {
-    id,
     titulo,
     introducao,
     data: postData,
+    imagem
   } = post;
 
 
@@ -70,8 +70,20 @@ const renderPost = (post) => {
   divHeader.appendChild(aTitle);
   divHeader.appendChild(aName);
 
-  const spanImage = document.createElement('span');
-  spanImage.className = 'image';
+  const spanImage = document.createElement('span'); 
+  spanImage.className = 'caseImage';
+
+  if(imagem){
+    let imagemCard = document.createElement('img')
+  imagemCard.className = 'image';
+  imagemCard.src = imagem
+    spanImage.appendChild(imagemCard)
+  }
+
+  
+
+
+
   divHeader.appendChild(spanImage);
 
   divCard.appendChild(divHeader);

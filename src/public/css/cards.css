@@ -71,6 +71,16 @@
   width: 3rem;
   border-radius: 0.5rem;
   object-fit: cover;
+
+}
+
+.caseImage{
+  display: block;
+  flex-shrink: 0;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
   background-color: royalblue;
 }
 
