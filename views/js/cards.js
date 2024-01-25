@@ -26,7 +26,7 @@ const fetchCards = async () => {
           ...fallbackData,
         };
 
-        return modifiedFallbackData;
+        return data = modifiedFallbackData;
       } else {
         throw new Error(`Erro de rede - ${fallbackResponse.status}`);
       }
