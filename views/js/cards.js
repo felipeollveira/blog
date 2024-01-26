@@ -44,6 +44,8 @@ const renderPost = (post) => {
   const {
     titulo,
     introducao,
+    desenvolvimento,
+    conclusao,
     data: postData,
     imagem
   } = post;
@@ -77,8 +79,17 @@ const renderPost = (post) => {
   if(imagem){
     let imagemCard = document.createElement('img')
   imagemCard.className = 'image';
+
+  
+
+  
+  imagemCard.onerror = function() {
+    imagemCard.style.display = 'none';
+  };  
+  
   imagemCard.src = imagem
-    spanImage.appendChild(imagemCard)
+
+  spanImage.appendChild(imagemCard)
   }
 
   
@@ -130,7 +141,22 @@ const renderPost = (post) => {
   dtReadingTime.className = 'dt';
   dtReadingTime.textContent = 'Tempo de leitura';
 
-  const tempoLeitura = 5;
+//LOGICA PARA TEMPO DE LEITURA
+//uma pessoa lê aproximadamente 200 a 250 palavras por minuto
+
+const totalCaracteres = introducao.length + desenvolvimento.length + conclusao.length;
+const palavrasPorMinuto = 200;
+const caracteresPorPalavra = 5;
+
+const palavras = totalCaracteres / caracteresPorPalavra;
+const tempoDeLeituraEmMinutos = palavras / palavrasPorMinuto;
+
+let tempoLeitura = 0;
+
+tempoDeLeituraEmMinutos.toFixed(2) < 1 ? tempoLeitura = 'Menos de 1' : tempoLeitura = parseFloat(tempoDeLeituraEmMinutos.toFixed());
+
+
+
 
   const ddReadingTime = document.createElement('p');
   ddReadingTime.className = 'dd';

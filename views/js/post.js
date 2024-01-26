@@ -75,6 +75,12 @@ const renderizarPost = (post) => {
     imagemHTML.style.display = 'none';
   } else {
     imagemHTML.style.display = 'block';
+  
+    imagemHTML.onerror = function() {
+      imagemHTML.style.display = 'none';
+    };
+  
+ 
     imagemHTML.src = imagem;
   }
 
