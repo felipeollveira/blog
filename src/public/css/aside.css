@@ -40,7 +40,6 @@
     gap: 10px;
     height: max-content;
     padding-bottom: 5px;
-   
 }
 
 
@@ -48,17 +47,20 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-items: center;
+    justify-content: left;
     padding: 6px;
     gap: 10px;
     border-radius: 0.5rem;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.098);
-    margin-bottom: 4px;
-}
+    margin-bottom: 4px;    
+   }
 
 
 .autor-info {
     display: flex;
     flex-direction: row;
+
 }
 
 .autor {
@@ -122,7 +124,6 @@ a{
     display: inline-block; 
     cursor: pointer;
     width: auto;
-
 }
 
 .dropdown-title {
@@ -141,14 +142,18 @@ a{
 }
 
 
+
 .arrow-down {
     display: inline-block;
+    transition-delay: 100ms;
+    transition-duration: 300ms;
     width: 0;
     height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 8px solid #333;
-    margin-left: 4px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #333;
+    margin-left: -3px;
+    transform-origin: center;
 }
 
 .dropdown-content a {

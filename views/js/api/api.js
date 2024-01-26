@@ -5,13 +5,8 @@ const cacheName = 'data-cache';
 
 const fetchAndCacheData = async () => {
   try {
-    // Limpar a cache existente
-    await limparCache();
-
-    // Abrir um novo cache
+    await limparCache()
     const cache = await caches.open(cacheName);
-
-    // Verificar se os dados já estão no cache
     const cachedResponse = await cache.match(new Request(urlApi));
 
     if (cachedResponse) {
@@ -21,17 +16,12 @@ const fetchAndCacheData = async () => {
       return data;
     }
 
-    // Se os dados não estão no cache, buscar da API
     const response = await fetch(urlApi);
 
     if (!response.ok) {
       throw new Error(`Erro ao buscar dados - ${response.status}`);
     }
-
-    // Converter a resposta em JSON
     const data = await response.json();
-
-    // Armazenar a resposta da API no cache
     await cache.put(new Request(urlApi), new Response(JSON.stringify(data)));
     
 
@@ -54,7 +44,9 @@ const limparCache = async () => {
   }
 };
 
-// Chama a função para buscar e armazenar dados
+
+
+
 (async () => {
   try {
     await fetchAndCacheData();
@@ -64,3 +56,6 @@ const limparCache = async () => {
 })();
 
 
+
+
+  

@@ -1,11 +1,5 @@
-const fs = require('fs').promises;
 
-const path = require('path');
-
-const urlChave = 'https://db-pubs.vercel.app';
-const caminhoArquivo = path.join('views/js/api/data/dados.json');
-
-let vNew = 0
+const urlChave = 'https://db-pubs-felipeollveiras-projects.vercel.app';
 
 const obterDados = async () => {
   try {

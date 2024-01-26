@@ -136,6 +136,7 @@
   }
   .card{
     min-width: 50%;
+
   }
 
 
@@ -152,6 +153,7 @@
   }
   .card{
     min-width: 50%;
+    max-width: auto;
   }
   .title{
     font-size: 16pt;
@@ -176,7 +178,7 @@
     align-items: center;
   }
   .card{
-    max-width: auto;
+    max-width: 600px;
   }
 
 

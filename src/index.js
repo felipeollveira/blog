@@ -5,10 +5,10 @@ const app = express();
 const { join } = require('path');
 require('dotenv').config()
 const sessionSecret = process.env.private_key
+const cors = require('cors')
 
 
-
-
+app.use(cors())
 
 app.use(session({ secret: sessionSecret, resave: true, saveUninitialized: true }));
 app.use(express.static(__dirname + '/public'));
@@ -20,4 +20,4 @@ app.use('/static', express.static(join("views")))
 app.use(root)
 
 
-app.listen(process.env.HOST || 3000)
+app.listen(4000)

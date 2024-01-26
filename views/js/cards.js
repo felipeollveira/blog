@@ -4,6 +4,7 @@ const onePost = document.getElementById('caseOnepost');
 
 const apiurl = 'https://db-pubs.vercel.app';
 
+
 const fetchCards = async () => {
   try {
     const cache = await caches.open('data-cache');
@@ -25,8 +26,8 @@ const fetchCards = async () => {
         const modifiedFallbackData = {
           ...fallbackData,
         };
-
-        return data = modifiedFallbackData;
+        console.log('Fallback')
+        return modifiedFallbackData;
       } else {
         throw new Error(`Erro de rede - ${fallbackResponse.status}`);
       }

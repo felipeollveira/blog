@@ -13,8 +13,7 @@ root.use(bodyParser.json());
 
 root.get('/', async (req, res) => {
   try {
-    const data = await obterDados();
-    res.render('pages/home', { data });
+      res.render('pages/home');
   } catch (error) {
     console.error('Erro ao renderizar página:', error.message);
     res.status(500).send('Erro interno no servidor.');
@@ -30,7 +29,7 @@ const extrairTitulo = (req, res, next) => {
 // Rota para lidar com o POST
 root.post('/', (req, res) => {
   const { titulo, dataFormat } = req.body;
- 
+  
 
   try {
     res.redirect(`/${dataFormat}/${titulo}`);
@@ -39,6 +38,8 @@ root.post('/', (req, res) => {
     res.status(500).send('Erro interno no servidor.');
   }
 });
+
+
 
 
 // Rota para lidar com o GET, usando o middleware personalizado

@@ -61,8 +61,8 @@ aside{
 }
 
 .home-grid{
-    display: flex;
-    justify-content: center;
+    display:inline-flex;
+    justify-content: space-evenly;
     grid-template-columns: 85% auto;
     flex-direction: row-reverse;
     padding: 10px;
@@ -98,7 +98,7 @@ footer{
     .home-grid{
         display: flex;
         flex-direction: column-reverse;
-        gap: 25px;
+        gap: 2px;
         align-content: center;
     }
     .home-grid-mobile{
