@@ -3,15 +3,14 @@ const cacheName = 'data-cache';
 
 
 
-const fetchAndCacheData = async () => {
+const fetchData = async () => {
   try {
-    await limparCache()
     const cache = await caches.open(cacheName);
     const cachedResponse = await cache.match(new Request(urlApi));
 
     if (cachedResponse) {
       const data = await cachedResponse.json();
-      console.log('Dados recuperados do cache (data-cache).');
+      console.log('Dados recuperados do cache.');
      
       return data;
     }
@@ -24,8 +23,6 @@ const fetchAndCacheData = async () => {
     const data = await response.json();
     await cache.put(new Request(urlApi), new Response(JSON.stringify(data)));
     
-
-    console.log('Dados da API armazenados no cache (data-cache) com sucesso.');
     return data;
   } catch (error) {
     console.error('Erro ao buscar ou armazenar dados:', error.message);
@@ -49,11 +46,16 @@ const limparCache = async () => {
 
 (async () => {
   try {
-    await fetchAndCacheData();
+    await fetchData();
   } catch (error) {
-    // Lidar com o erro conforme necessário
   }
 })();
+
+
+setInterval(async () => {
+  await limparCache();
+}, 600000);
+
 
 
 

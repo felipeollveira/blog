@@ -10,12 +10,14 @@ const fetchCards = async () => {
     const cache = await caches.open('data-cache');
     const cachedResponse = await cache.match(apiurl);
 
-    let data = cachedResponse ? await cachedResponse.json() : null;
+    let data = cachedResponse ? await cachedResponse.json() : undefined;
+
+    if (data === undefined) {
+        throw new Error('Fallback');
+    }
     
     return data;
   } catch (error) {
-    console.error('Erro ao buscar dados:', error.message);
-   
     // segunda opcao: buscar na api
     try {
       const fallbackResponse = await fetch(apiurl);
@@ -26,7 +28,6 @@ const fetchCards = async () => {
         const modifiedFallbackData = {
           ...fallbackData,
         };
-        console.log('Fallback')
         return modifiedFallbackData;
       } else {
         throw new Error(`Erro de rede - ${fallbackResponse.status}`);
