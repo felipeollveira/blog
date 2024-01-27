@@ -5,6 +5,7 @@ const cacheName = 'data-cache';
 
 const fetchData = async () => {
   try {
+    await limparCache()
     const cache = await caches.open(cacheName);
     const cachedResponse = await cache.match(new Request(urlApi));
 
@@ -43,7 +44,6 @@ const limparCache = async () => {
 
 
 
-
 (async () => {
   try {
     await fetchData();
@@ -51,10 +51,6 @@ const limparCache = async () => {
   }
 })();
 
-
-setInterval(async () => {
-  await limparCache();
-}, 600000);
 
 
 
