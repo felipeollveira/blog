@@ -63,13 +63,29 @@ const renderPost = (post) => {
   const aTitle = document.createElement('a');
   aTitle.className = 'title';
   aTitle.href = '#';
-  aTitle.textContent = titulo;
+  
+
+  function quebrarTexto(titulo) {
+    const lines = [];
+  
+    for (let i = 0; i < titulo.length; i += 30) {
+      lines.push(titulo.slice(i, i + 30));
+    }
+  
+    return lines.join('\n');
+  }
+
+  const tituloQuebrado = quebrarTexto(titulo);
+  aTitle.textContent = tituloQuebrado;
+
 
   const aName = document.createElement('a');
   aName.className = 'name';
   aName.href = 'https://github.com/felipeollveira';
   aName.target = '_blank';
   aName.textContent = '';
+
+
 
   divHeader.appendChild(aTitle);
   divHeader.appendChild(aName);
