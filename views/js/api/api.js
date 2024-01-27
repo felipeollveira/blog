@@ -36,7 +36,7 @@ const limparCache = async () => {
   try {
     const cache = await caches.open(cacheName);
     await cache.delete(urlApi);
-    console.log('Cache limpa com sucesso.');
+    //console.log('Cache limpa com sucesso.');
   } catch (error) {
     console.error('Erro ao limpar o cache:', error);
   }
