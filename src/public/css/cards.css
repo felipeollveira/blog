@@ -21,7 +21,7 @@
   grid-template-rows: repeat(3, 1fr); 
   height: 200px;
   min-width: auto;
-  max-width: 350px;
+  max-width: 420px;
   position: relative;
   overflow: hidden;
   border: 1px solid var(--cor-borda);

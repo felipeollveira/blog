@@ -40,12 +40,15 @@ root.post('/', (req, res) => {
 });
 
 
-
-
 // Rota para lidar com o GET, usando o middleware personalizado
 root.get('/:data/:titulo', extrairTitulo, (req, res) => {
   const titulo = req.titulo;
   res.render('pages/posts', { titulo });
+});
+
+
+root.get('/calculadoraimc', (req, res) => {
+  res.render('pages/imc');
 });
 
   
