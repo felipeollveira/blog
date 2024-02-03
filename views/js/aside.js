@@ -6,3 +6,5 @@ dropdown.addEventListener('click', () => {
     content.style.display = (content.style.display === 'none') ? 'block' : 'none';
     arrow.style.transform = (content.style.display === 'block') ? 'rotate(180deg)' : 'rotate(360deg)';
 });
+
+

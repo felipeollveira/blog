@@ -16,6 +16,8 @@
 
   }
 
+  
+
 
 .actions {
     padding: 12px;
@@ -25,7 +27,11 @@
     background-color: var(--background-fl);
     margin-bottom: 10px;
 
+}
 
+.actions:nth-child(2) {
+    max-height: 150px;
+    overflow-y: auto;
 }
 
 .actions p {
