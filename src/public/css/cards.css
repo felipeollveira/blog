@@ -30,9 +30,6 @@
   gap: 1%;
 }
 
-.layout-icon img:hover{
-  transform: rotateZ(90deg);
-}
 
 
 .name{

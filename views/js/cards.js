@@ -1,18 +1,30 @@
 const root = document.getElementById('root');
 const noPosts = document.getElementById('casenopost');
 const onePost = document.getElementById('caseOnepost');
-
+const iconLayout = document.getElementById('icon-layout')
 
 const apiurl = 'https://db-pubs.vercel.app';
 
 
-function grid(){
-  
-  const cardCss = document.getElementsByClassName('card')
+let rotationAngle = 0; 
 
-  root.style.gridTemplateColumns = (root.style.gridTemplateColumns === 'auto') ? 'auto auto' : 'auto'
-  cardCss.style.maxWidth = (cardCss.style.maxWidth === '440px') ? 'max-content' : '440px';
-  
+function grid() {
+    const cardCss = document.getElementsByClassName('card');
+
+    setTimeout(() => {
+      
+    
+        
+    
+        root.style.gridTemplateColumns = (root.style.gridTemplateColumns === 'auto') ? 'auto auto' : 'auto';
+        setTimeout(() => {
+
+            rotationAngle += 90;
+            iconLayout.style.transform = `rotateZ(${rotationAngle}deg)`;
+        }, 50);
+    }, 200);
+
+    
 }
 
 
