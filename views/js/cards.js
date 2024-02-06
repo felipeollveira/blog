@@ -2,7 +2,19 @@ const root = document.getElementById('root');
 const noPosts = document.getElementById('casenopost');
 const onePost = document.getElementById('caseOnepost');
 
+
 const apiurl = 'https://db-pubs.vercel.app';
+
+
+function grid(){
+  
+  const cardCss = document.getElementsByClassName('card')
+
+  root.style.gridTemplateColumns = (root.style.gridTemplateColumns === 'auto') ? 'auto auto' : 'auto'
+  cardCss.style.maxWidth = (cardCss.style.maxWidth === '440px') ? 'max-content' : '440px';
+  
+}
+
 
 
 const fetchCards = async () => {
@@ -56,6 +68,7 @@ const renderPost = (post) => {
 
   const divCard = document.createElement('div');
   divCard.className = 'card';
+  divCard.setAttribute('id','cardWidth')
 
   const divHeader = document.createElement('div');
   divHeader.className = 'header';
@@ -120,7 +133,8 @@ const renderPost = (post) => {
   const pDescription = document.createElement('p');
   pDescription.className = 'description';
 
-  const maxLength = 156;
+  const maxLength = 156
+
 
   if (introducao.length > maxLength) {
     const truncatedText = introducao.substring(0, maxLength);

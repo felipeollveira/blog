@@ -1,6 +1,7 @@
 
 .menu{
-    display: block;
+    display:contents;
+
 }
 
 
@@ -55,9 +56,9 @@
     align-items: center;
     justify-items: center;
     justify-content: left;
-    padding: 6px;
+    padding-bottom: 5px;
+    padding-right: 6px;
     gap: 10px;
-    border-radius: 0.5rem;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.098);
     margin-bottom: 4px;    
    }
