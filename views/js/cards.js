@@ -8,22 +8,18 @@ const apiurl = 'https://db-pubs.vercel.app';
 
 let rotationAngle = 0; 
 
-function grid() {
-    const cardCss = document.getElementsByClassName('card');
 
+function grid() {
+/*
     setTimeout(() => {
-      
-    
-        
-    
-        root.style.gridTemplateColumns = (root.style.gridTemplateColumns === 'auto') ? 'auto auto' : 'auto';
+         root.style.gridTemplateColumns = (root.style.gridTemplateColumns === 'auto') ? 'auto auto' : 'auto';
         setTimeout(() => {
 
             rotationAngle += 90;
             iconLayout.style.transform = `rotateZ(${rotationAngle}deg)`;
         }, 50);
     }, 200);
-
+*/
     
 }
 
@@ -130,7 +126,7 @@ const renderPost = (post) => {
   };  
   
   imagemCard.src = imagem
-
+  imagemCard.setAttribute('alt',aTitle.textContent)
   spanImage.appendChild(imagemCard)
   }
 
