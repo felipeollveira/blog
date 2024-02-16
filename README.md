@@ -33,5 +33,5 @@ Este projeto está sob a licença MIT.
 
 ---
 
-**[Seu Nome ou Nome do Blog]**
-[Links para Redes Sociais ou Site Pessoal]
+**Blog**
+[blogview-projects.vercel.app/]
