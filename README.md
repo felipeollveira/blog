@@ -1,19 +1,20 @@
-# EM DESENVOLVIMENTO
+# Blog
+### Em manuntenção ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 
 ![A](link-para-imagem-de-capa.jpg)
 
-## Descrição
+### Descrição
 
 Bem-vindo ao meu blog, onde compartilho pensamentos, ideias e experiências sobre TUDO! Sinta-se à vontade para explorar os artigos e comentar!
 
-## Recursos
+### Recursos
 
 - **Artigos Recentes:** Confira os artigos mais recentes sobre [temas do blog].
 - **Categorias:** Navegue pelos temas por categoria, como tecnologia, viagens, estilo de vida, etc.
 - **Receba as atualizações via email:** Em todo novo artigo voce receberá uma notificação !
 - **Contato:** Encontre informações de contato para perguntas ou colaborações.
 
-## Como Contribuir
+### Como Contribuir
 
 Se você deseja contribuir com um artigo ou correção, siga estas etapas:
 
@@ -23,11 +24,11 @@ Se você deseja contribuir com um artigo ou correção, siga estas etapas:
 4. Faça push para a branch: `git push origin nome-da-sua-branch`.
 5. Abra um Pull Request.
 
-## Tecnologias Utilizadas
+### Tecnologias Utilizadas
 
 - NODEJS, EJS
 
-## Licença
+### Licença
 
 Este projeto está sob a licença MIT. 
 
