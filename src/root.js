@@ -28,11 +28,10 @@ const extrairTitulo = (req, res, next) => {
 
 // Rota para lidar com o POST
 root.post('/', (req, res) => {
-  const { titulo, dataFormat } = req.body;
-  
+  const { titulo, autor, dataFormat } = req.body;
 
   try {
-    res.redirect(`/${dataFormat}/${titulo}`);
+    res.redirect(`/${autor}/${dataFormat}/${titulo}`);
   } catch (error) {
     console.log(error);
     res.status(500).send('Erro interno no servidor.');
@@ -41,7 +40,7 @@ root.post('/', (req, res) => {
 
 
 // Rota para lidar com o GET, usando o middleware personalizado
-root.get('/:data/:titulo', extrairTitulo, (req, res) => {
+root.get('/:autor/:dataFormat/:titulo', extrairTitulo, (req, res) => {
   const titulo = req.titulo;
   res.render('pages/posts', { titulo });
 });

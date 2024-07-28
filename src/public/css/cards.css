@@ -41,7 +41,7 @@
   display: grid;
   grid-template-rows: repeat(3, 1fr); 
   height: 200px;
-max-width:440px;
+max-width:500px;
   position: relative;
   overflow: hidden;
   border: 1px solid var(--cor-borda);
@@ -78,7 +78,7 @@ max-width:440px;
   text-decoration: underline rgb(170, 170, 170);
 }
 
-/* nome ed autor se quiser */
+/* nome do autor se quiser */
 .name {
   margin-top: 0.25rem;
   font-size: 0.75rem;

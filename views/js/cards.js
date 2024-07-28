@@ -68,7 +68,8 @@ const renderPost = (post) => {
     desenvolvimento,
     conclusao,
     data: postData,
-    imagem
+    imagem,
+    autor
   } = post;
 
 
@@ -195,8 +196,6 @@ let tempoLeitura = 0;
 tempoDeLeituraEmMinutos.toFixed(2) < 1 ? tempoLeitura = 'Menos de 1' : tempoLeitura = parseFloat(tempoDeLeituraEmMinutos.toFixed());
 
 
-
-
   const ddReadingTime = document.createElement('p');
   ddReadingTime.className = 'dd';
   ddReadingTime.textContent = tempoLeitura + ' minutos';
@@ -214,7 +213,7 @@ tempoDeLeituraEmMinutos.toFixed(2) < 1 ? tempoLeitura = 'Menos de 1' : tempoLeit
   divHeader.onclick = function () {
     fetch('/', {
       method: 'POST',
-      body: JSON.stringify({ titulo, dataFormat }),
+      body: JSON.stringify({ titulo, autor, dataFormat}),
       headers: {
         'Content-Type': 'application/json',
       },
