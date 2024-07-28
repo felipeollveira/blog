@@ -64,6 +64,11 @@
      
         
         <div class="home-grid" id="grid">
+            
+    
+            <aside>
+                <%- include('../partials/aside'); %>
+            </aside>
             <div class="main-footer">
                 <div class="grid-layout-cards">
                     <span class="layout-icon"><img id="icon-layout" title="Filtrar" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.onlinewebfonts.com%2Fsvg%2Fimg_353033.png&f=1&nofb=1&ipt=4996cdbbae6994bde3c4a53aef1ed4c8d0df21790ed2adf8bd23c36961bf6496&ipo=images" alt="layout" onclick="grid()"></span>
@@ -82,19 +87,14 @@
             
             </section>   
             
-            
-
-            <aside>
-                <%- include('../partials/aside'); %>
-            </aside>
         </div>
-        
+        <footer>
+            <%- include('../partials/footer'); %>
+            
+        </footer>    
     </main>
 
-    <footer>
-        <%- include('../partials/footer'); %>
-
-    </footer>
+    
     <script  type="text/javascript" src="static/js/api/api.js"></script>
     <script type="text/javascript" src="static/js/search_post.js"></script>
 

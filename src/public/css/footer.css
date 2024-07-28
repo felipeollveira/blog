@@ -11,6 +11,7 @@
 
 .footer {
     justify-content: center;
+    padding: 12px;
     text-align: center;
     position: sticky;
     top: 0;
@@ -48,6 +49,6 @@ footer li:hover {
 
 .footer section{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto;
     gap: 10px;
 }
