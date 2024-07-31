@@ -18,7 +18,8 @@
   }
 
   
-
+.menu div{
+}
 
 .actions {
     padding: 12px;
@@ -68,6 +69,7 @@
 
 .autor-info {
     display: flex;
+    width: auto;
     flex-direction: row;
 
 }
@@ -141,23 +143,35 @@ a{
 }
 
 .dropdown-acc{
+    z-index: 1000;
+    opacity: 1.0;
+    display: grid;
     background-color: var(--background);
     border: 1px solid var(--cor-borda);
     font-size: 10pt;
-
+    position: absolute;
+    left: 0%;
     color: rgb(148, 148, 148);
-    width: 100%;
-    left: 26px;
+    width:auto ;
     top: 0%;
 }
-.dropdown-acc-content{
+
+.aside-actions{
+    transition: opacity 0.2s ease-in-out; 
+}
+
+.dropdown-acc-content div span{
     overflow-y: auto;
-    height: 90px;
+    height: 6px;
 }
 
 #dropdown-acc{
     display: none;
 }
+
+.visibility-05 {
+    opacity: 0.5;
+  }
 
 
 
@@ -166,13 +180,13 @@ a{
     text-align: left;
     cursor:default;
 }
-.dropdown-acc div:hover{
+.dropdown-acc div div:hover{
     background-color: rgba(255, 255, 255, 0.021);
 }
 
 .dropdown-acc section{
     display: grid;
-    grid-template-columns: 90% auto;
+    grid-template-columns: 85% auto;
     align-items: center;
     border-radius: 4px;
     background-color: #1d1d1d;
@@ -203,12 +217,12 @@ border: 0;
     cursor: pointer;
 }
 
-.dropdown-acc div div, .dropdown-acc div div span{
+.dropdown-acc div span div{
     display: flex;
     align-items: center;
 }
 
-.dropdown-acc div div{
+.dropdown-acc div span div{
     padding: 0px 4px 0px 6px;
 }
 
