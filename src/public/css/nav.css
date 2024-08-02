@@ -1,10 +1,10 @@
 /* Estilo para o nav na versão desktop */
 nav {
-	background: rgba(0, 0, 0, 0.333);
-    width: 100%;
+	background: linear-gradient(0deg, rgba(0,19,113,0) 0%, rgba(0, 0, 0, 0.473) 29%);
+	width: 100%;
     position: fixed;
 	top: 10;
-    z-index: 1;
+    z-index: 100;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 	transition: top 0.3s ease-in-out;
 	border-bottom: 1px solid var(--cor-borda);
