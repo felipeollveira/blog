@@ -41,7 +41,7 @@
   display: grid;
   grid-template-rows: repeat(3, 1fr); 
   height: 200px;
-max-width:500px;
+max-width:100%;
   position: relative;
   overflow: hidden;
   border: 1px solid var(--cor-borda);
@@ -176,7 +176,7 @@ max-width:500px;
     align-items: center;
   }
   .card{
-    min-width: 50%;
+    min-width: auto;
     max-width: auto;
   }
   .title{
@@ -202,7 +202,7 @@ max-width:500px;
     align-items: center;
   }
   .card{
-    max-width: max-content;
+    max-width: 100%;
   }
 
 

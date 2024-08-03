@@ -56,13 +56,13 @@
     display: flex;
     position: relative;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-items: center;
     justify-content: left;
     padding-bottom: 5px;
     padding-right: 6px;
     gap: 10px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.098);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0);
     margin-bottom: 4px;    
    }
 
@@ -150,7 +150,7 @@ a{
     border: 1px solid var(--cor-borda);
     font-size: 10pt;
     position: absolute;
-    left: 0%;
+    left: 110px;
     color: rgb(148, 148, 148);
     width:auto ;
     top: 0%;
@@ -170,7 +170,8 @@ a{
 }
 
 .visibility-05 {
-    opacity: 0.5;
+    opacity: 0.4;
+    pointer-events: none;
   }
 
 

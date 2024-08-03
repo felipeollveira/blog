@@ -25,16 +25,16 @@
     background-color: #5555551f;
   }
   
-
-:root {
+  :root {
     --colorfooter: rgb(43, 43, 43);
     --colorsystem: rgb(48, 82, 154);
     --cor-h1: rgb(213, 213, 213);
     --background: #131313;
     --background-fl:rgba(20, 20, 20, 0.548);
-    --cor-borda: rgba(255, 255, 255, 0.103);
+    --cor-borda: rgba(255, 255, 255, 0.055);
     --bs-font-sans-serif: 'Proxima Nova', sans-serif
 }
+
 
 *{
     margin: 0;
@@ -49,7 +49,6 @@ body{
     width: 100%;
     flex-direction: column;
     gap: 50px;
-
 }
 
 aside{
@@ -61,8 +60,7 @@ aside{
 }
 
 .home-grid{
-    display:inline-flex;
-    justify-content: space-evenly;
+    display:grid;
     grid-template-columns: 8cm auto auto;
     gap: 28px;
     flex-direction: row;

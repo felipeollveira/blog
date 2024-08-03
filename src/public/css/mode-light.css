@@ -1,0 +1,3 @@
+.mode-light:checked + body{
+    background-color: red;
+}
