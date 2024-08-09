@@ -8,7 +8,7 @@ const asideActions = document.querySelector('.aside-actions');
 dropdown.addEventListener('click', () => {
     if(dropdownprofiles){
         dropdownprofiles.style.display ='block'
-        arrow.style.display ='none'
+        //arrow.style.display ='none'
 
         asideActions.classList.add('visibility-05');
     }else{

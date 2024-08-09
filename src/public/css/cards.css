@@ -102,7 +102,7 @@ max-width:100%;
   width: 3rem;
   border-radius: 0.5rem;
   object-fit: cover;
-  background-color: royalblue;
+  background-color: var(--colorsystem);
 }
 
 .description {

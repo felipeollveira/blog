@@ -180,6 +180,18 @@ const renderPost = (post) => {
   const dtReadingTime = document.createElement('p');
   dtReadingTime.className = 'dt';
   dtReadingTime.textContent = 'Tempo de leitura';
+// name of autor
+  const divNameAut = document.createElement('div');
+  divNameAut.className = 'cr';
+
+  const dtNameAut = document.createElement('p');
+  dtNameAut.className = 'dt';
+  dtNameAut.textContent = 'Autor';
+
+  const ddNameAut = document.createElement('p');
+  ddNameAut.className = 'dd';
+  ddNameAut.textContent = autor
+  
 
 //LOGICA PARA TEMPO DE LEITURA
 //uma pessoa lê aproximadamente 200 a 250 palavras por minuto
@@ -205,6 +217,10 @@ tempoDeLeituraEmMinutos.toFixed(2) < 1 ? tempoLeitura = 'Menos de 1' : tempoLeit
 
   dlPostInfo.appendChild(divPublished);
   dlPostInfo.appendChild(divReadingTime);
+
+  divNameAut.appendChild(dtNameAut)
+  divNameAut.appendChild(ddNameAut)
+  dlPostInfo.appendChild(divNameAut)
 
   divCard.appendChild(dlPostInfo);
 
