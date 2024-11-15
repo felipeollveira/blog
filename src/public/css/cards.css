@@ -50,6 +50,10 @@ max-width:100%;
   background-color: var(--background-fl);
 }
 
+.header:hover{
+  background-color: rgba(0, 47, 255, 0.055);
+}
+
 
 .header {
   display: flex;

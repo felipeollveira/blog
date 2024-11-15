@@ -98,7 +98,7 @@ const renderPost = (post) => {
   }
 
   const tituloQuebrado = quebrarTexto(titulo);
-  aTitle.textContent = tituloQuebrado;
+  aTitle.textContent = tituloQuebrado + " ↵ ";
 
 
   const aName = document.createElement('a');
