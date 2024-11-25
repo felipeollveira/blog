@@ -151,15 +151,16 @@ assigneValueSelect.addEventListener('change', () => {
   const selectedAssigne = assigneValueSelect.value || 'All';
   getAndRenderPosts(selectedAssigne);
 
-
-  //const urlParams = new URLSearchParams(window.location.search);
+/*
+  const urlParams = new URLSearchParams(window.location.search);
   if (selectedAssigne === 'All') {
       urlParams.delete('assigne');
   } else {
-      //urlParams.set('assigne', selectedAssigne);
+      urlParams.set('assigne', selectedAssigne);
   }
   const newUrl = window.location.pathname + '?' + urlParams.toString();
   window.history.replaceState({}, '', newUrl);
+  */
 });
 
 
