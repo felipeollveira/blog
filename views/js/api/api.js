@@ -1,8 +1,7 @@
 const urlApi = 'https://db-pubs.vercel.app';
 const cacheName = 'data-cache';
 
-
-
+/*
 const fetchData = async () => {
   try {
     await limparCache()
@@ -29,7 +28,7 @@ const fetchData = async () => {
     console.error('Erro ao buscar ou armazenar dados:', error.message);
     throw error;
   }
-};
+};*/
 
 // Função para limpar a cache
 const limparCache = async () => {

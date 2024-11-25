@@ -7,7 +7,7 @@ const urlDadosJson = '../../src/data/dados.json';
 const obterTituloDaURL = () => {
   const urlAtual = window.location.href;
   const partesUrl = urlAtual.split('/');
-  return decodeURIComponent(partesUrl[partesUrl.length - 1]);
+  return decodeURIComponent(partesUrl[partesUrl.length - 2]);
 };
 
 // Função para buscar dados do post na API

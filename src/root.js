@@ -21,17 +21,16 @@ root.get('/', async (req, res) => {
 });
   
 const extrairTitulo = (req, res, next) => {
-  const { titulo } = req.params;
-  req.titulo = titulo;
-  next();
+  req.titulo = req.params.titulo;
+  next(); 
 };
 
 // Rota para lidar com o POST
 root.post('/', (req, res) => {
-  const { titulo, autor, dataFormat } = req.body;
+  const { titulo, autor, id } = req.body;
 
   try {
-    res.redirect(`/${autor}/${dataFormat}/${titulo}`);
+    res.redirect(`/${autor}/${titulo}/${id}`);
   } catch (error) {
     console.log(error);
     res.status(500).send('Erro interno no servidor.');
@@ -39,8 +38,9 @@ root.post('/', (req, res) => {
 });
 
 
+
 // Rota para lidar com o GET, usando o middleware personalizado
-root.get('/:autor/:dataFormat/:titulo', extrairTitulo, (req, res) => {
+root.get('/:autor/:titulo/:id', extrairTitulo, (req, res) => {
   const titulo = req.titulo;
   res.render('pages/posts', { titulo });
 });

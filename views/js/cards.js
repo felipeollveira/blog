@@ -1,282 +1,185 @@
 const root = document.getElementById('root');
-const noPosts = document.getElementById('casenopost');
-const onePost = document.getElementById('caseOnepost');
-const iconLayout = document.getElementById('icon-layout')
+const noPostsContainer = document.getElementById('casenopost');
+const onePostContainer = document.getElementById('caseOnepost');
+const assigneValueSelect = document.getElementById('dropdown');
 
-const apiurl = 'https://db-pubs.vercel.app';
+const apiurl = 'https://db-pubs.vercel.app/';
 
+// Funções auxiliares
+const quebrarTexto = (texto, comprimentoLinha = 30) => texto.match(new RegExp(`.{1,${comprimentoLinha}}`, 'g')).join('\n');
+const truncarTexto = (texto, maxLength = 156) => texto.length <= maxLength ? texto : texto.substring(0, maxLength) + '...';
+const calcularTempoLeitura = (texto) => {
+    const palavras = texto.split(/\s+/).length;
+    const tempoLeituraMinutos = palavras / 200;
+    return tempoLeituraMinutos < 1 ? 'Menos de 1 minuto' : `${Math.ceil(tempoLeituraMinutos)} minutos`;
+};
 
-let rotationAngle = 0; 
+const criarInfoItem = (label, value) => {
+    const infoItem = document.createElement('div');
+    infoItem.className = 'cr';
+    infoItem.innerHTML = `<p class="dt">${label}</p><p class="dd">${value}</p>`;
+    return infoItem;
+};
 
+const criarPostElement = (post) => {
+    const { titulo, introducao, desenvolvimento, conclusao, data, imagem, autor, _id } = post;
+    const dataFormatada = new Date(data).toLocaleDateString('pt-BR', { year: 'numeric', month: 'long' });
 
-function grid() {
-/*
-    setTimeout(() => {
-         root.style.gridTemplateColumns = (root.style.gridTemplateColumns === 'auto') ? 'auto auto' : 'auto';
-        setTimeout(() => {
+    const card = document.createElement('div');
+    card.className = 'card';
 
-            rotationAngle += 90;
-            iconLayout.style.transform = `rotateZ(${rotationAngle}deg)`;
-        }, 50);
-    }, 200);
-*/
-    
-}
+    const header = document.createElement('div');
+    header.className = 'header';
 
+    const titleLink = document.createElement('a');
+    titleLink.className = 'title';
+    titleLink.href = `/${autor}/${titulo}/${_id}`; // Link com o ID do post
+    titleLink.textContent = quebrarTexto(titulo) + " ↵ ";
+    header.appendChild(titleLink);
 
-
-const fetchCards = async () => {
-  try {
-    const cache = await caches.open('data-cache');
-    const cachedResponse = await cache.match(apiurl);
-
-    let data = cachedResponse ? await cachedResponse.json() : undefined;
-
-    if (data === undefined) {
-        throw new Error('Fallback');
+    if (imagem) {
+        const imageContainer = document.createElement('span');
+        imageContainer.className = 'caseImage';
+        const postImage = document.createElement('img');
+        postImage.className = 'image';
+        postImage.src = imagem;
+        postImage.alt = titulo;
+        postImage.onerror = () => postImage.style.display = 'none';
+        imageContainer.appendChild(postImage);
+        header.appendChild(imageContainer);
     }
-    
-    return data;
-  } catch (error) {
-    // segunda opcao: buscar na api
+
+    card.appendChild(header);
+
+    const description = document.createElement('p');
+    description.className = 'description';
+    description.textContent = truncarTexto(introducao);
+    card.appendChild(description);
+
+    const postInfo = document.createElement('div');
+    postInfo.className = 'post-info';
+    postInfo.append(
+        criarInfoItem('Publicado', dataFormatada),
+        criarInfoItem('Tempo de leitura', calcularTempoLeitura(introducao + desenvolvimento + conclusao)),
+        criarInfoItem('Autor', autor)
+    );
+    card.appendChild(postInfo);
+
+    return card;
+};
+
+const fetchData = async () => {
+    const cacheName = 'data-cache';
+    const cache = await caches.open(cacheName);
+    let data;
+
     try {
-      const fallbackResponse = await fetch(apiurl);
-      
-      if (fallbackResponse.ok) {
-        const fallbackData = await fallbackResponse.json();
-
-        const modifiedFallbackData = {
-          ...fallbackData,
-        };
-        return modifiedFallbackData;
-      } else {
-        throw new Error(`Erro de rede - ${fallbackResponse.status}`);
-      }
-    } catch (fallbackError) {
-      console.error('Erro no fallback:', fallbackError.message);
-      throw fallbackError;
-    }
-  }
-};
-
-
-
-const renderPost = (post) => {
-  const {
-    titulo,
-    introducao,
-    desenvolvimento,
-    conclusao,
-    data: postData,
-    imagem,
-    autor
-  } = post;
-
-
-  const dataFormat = postData.substring(0, 4);
-
-  const divCard = document.createElement('div');
-  divCard.className = 'card';
-  divCard.setAttribute('id','cardWidth')
-
-  const divHeader = document.createElement('div');
-  divHeader.className = 'header';
-
-  const aTitle = document.createElement('a');
-  aTitle.className = 'title';
-  aTitle.href = '#';
-  
-
-  function quebrarTexto(titulo) {
-    const lines = [];
-  
-    for (let i = 0; i < titulo.length; i += 30) {
-      lines.push(titulo.slice(i, i + 30));
-    }
-  
-    return lines.join('\n');
-  }
-
-  const tituloQuebrado = quebrarTexto(titulo);
-  aTitle.textContent = tituloQuebrado + " ↵ ";
-
-
-  const aName = document.createElement('a');
-  aName.className = 'name';
-  aName.href = 'https://github.com/felipeollveira';
-  aName.target = '_blank';
-  aName.textContent = '';
-
-
-
-  divHeader.appendChild(aTitle);
-  divHeader.appendChild(aName);
-
-  const spanImage = document.createElement('span'); 
-  spanImage.className = 'caseImage';
-
-  if(imagem){
-    let imagemCard = document.createElement('img')
-  imagemCard.className = 'image';
-
-  
-
-  
-  imagemCard.onerror = function() {
-    imagemCard.style.display = 'none';
-  };  
-  
-  imagemCard.src = imagem
-  imagemCard.setAttribute('alt',aTitle.textContent)
-  spanImage.appendChild(imagemCard)
-  }
-
-  
-
-
-
-  divHeader.appendChild(spanImage);
-
-  divCard.appendChild(divHeader);
-
-  const pDescription = document.createElement('p');
-  pDescription.className = 'description';
-
-  const maxLength = 156
-
-
-  if (introducao.length > maxLength) {
-    const truncatedText = introducao.substring(0, maxLength);
-    const lastPeriodIndex = truncatedText.lastIndexOf('.', '!');
-
-    if (lastPeriodIndex !== -1) {
-      pDescription.textContent =
-        truncatedText.substring(0, lastPeriodIndex + 1) + '..';
-    } else pDescription.textContent = truncatedText + '...';
-  } else pDescription.textContent = introducao;
-
-  divCard.appendChild(pDescription);
-
-  const dlPostInfo = document.createElement('div');
-  dlPostInfo.className = 'post-info';
-
-  const divPublished = document.createElement('div');
-  divPublished.className = 'cr';
-
-  const dtPublished = document.createElement('p');
-  dtPublished.className = 'dt';
-  dtPublished.textContent = 'Publicado';
-
-  const ddPublished = document.createElement('p');
-  ddPublished.className = 'dd';
-  ddPublished.textContent = postData.replace('-', '/').substring(0, 7);
-
-  divPublished.appendChild(dtPublished);
-  divPublished.appendChild(ddPublished);
-
-  const divReadingTime = document.createElement('div');
-  divReadingTime.className = 'cr';
-
-  const dtReadingTime = document.createElement('p');
-  dtReadingTime.className = 'dt';
-  dtReadingTime.textContent = 'Tempo de leitura';
-// name of autor
-  const divNameAut = document.createElement('div');
-  divNameAut.className = 'cr';
-
-  const dtNameAut = document.createElement('p');
-  dtNameAut.className = 'dt';
-  dtNameAut.textContent = 'Autor';
-
-  const ddNameAut = document.createElement('p');
-  ddNameAut.className = 'dd';
-  ddNameAut.textContent = autor
-  
-
-//LOGICA PARA TEMPO DE LEITURA
-//uma pessoa lê aproximadamente 200 a 250 palavras por minuto
-
-const totalCaracteres = introducao.length + desenvolvimento.length + conclusao.length;
-const palavrasPorMinuto = 200;
-const caracteresPorPalavra = 5;
-
-const palavras = totalCaracteres / caracteresPorPalavra;
-const tempoDeLeituraEmMinutos = palavras / palavrasPorMinuto;
-
-let tempoLeitura = 0;
-
-tempoDeLeituraEmMinutos.toFixed(2) < 1 ? tempoLeitura = 'Menos de 1' : tempoLeitura = parseFloat(tempoDeLeituraEmMinutos.toFixed());
-
-
-  const ddReadingTime = document.createElement('p');
-  ddReadingTime.className = 'dd';
-  ddReadingTime.textContent = tempoLeitura + ' minutos';
-
-  divReadingTime.appendChild(dtReadingTime);
-  divReadingTime.appendChild(ddReadingTime);
-
-  dlPostInfo.appendChild(divPublished);
-  dlPostInfo.appendChild(divReadingTime);
-
-  divNameAut.appendChild(dtNameAut)
-  divNameAut.appendChild(ddNameAut)
-  dlPostInfo.appendChild(divNameAut)
-
-  divCard.appendChild(dlPostInfo);
-
-  root.appendChild(divCard);
-
-  divHeader.onclick = function () {
-    fetch('/', {
-      method: 'POST',
-      body: JSON.stringify({ titulo, autor, dataFormat}),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (response.ok) {
-          window.location.href = response.url;
+        const cachedResponse = await cache.match(apiurl);
+        if (cachedResponse) {
+            data = await cachedResponse.json();
+            console.log('Dados do cache usados');
         } else {
-          console.error('Error sending request:', response.status);
+            console.log('Buscando dados da API');
+            const response = await fetch(apiurl);
+            if (!response.ok) {
+                throw new Error(`Erro de rede - ${response.status}`);
+            }
+            data = await response.json();
+            const responseToCache = response.clone();
+            cache.put(apiurl, responseToCache);
         }
-      })
-      .catch(error => {
-        console.error('Error sending request:', error);
-      });
-  };
-};
-
-const showNoPosts = () => {
-  noPosts.style.display = 'flex';
-};
-
-
-
-const hideNoPosts = () => {
-  noPosts.style.display = 'none';
-};
-
-const renderPosts = (posts) => {
-  for (const post of posts) {
-      renderPost(post);
-   
-  }
-};
-
-fetchCards()
-  .then(data => {
-    const { posts } = data;
-
-    if (posts.length === 0) {
-      showNoPosts();
-    } 
-    else {
-      hideNoPosts();
-      renderPosts(posts);
+    } catch (error) {
+        console.error('Erro ao buscar dados:', error);
+        return null;
     }
-  })
-  .catch(error => {
-    console.error('Erro ao buscar dados:', error.message);
-  });
 
+    return data;
+};
+
+const showNoPosts = (assigne) => {
+    noPostsContainer.style.display = 'flex';
+    onePostContainer.style.display = 'none';
+
+    let noPostsMessage = document.getElementById('noPostsMessage');
+
+    if (!noPostsMessage) {
+        noPostsMessage = document.createElement('h2');
+        noPostsMessage.id = 'noPostsMessage';
+        noPostsContainer.appendChild(noPostsMessage);
+    }
+
+    noPostsMessage.textContent = assigne === 'All' ? 'Não há posts disponíveis.' : `Não há posts disponíveis para ${assigne}.`;
+};
+
+const renderPosts = (posts, assigne = 'All') => {
+    root.innerHTML = '';
+
+    const filteredPosts = assigne === 'All' ? posts : posts.filter(post => post.autor.toLowerCase() === assigne.toLowerCase());
+
+    if (filteredPosts.length === 0) {
+        showNoPosts(assigne);
+    } else if (filteredPosts.length === 1) {
+        onePostContainer.style.display = 'block';
+        noPostsContainer.style.display = 'none';
+        onePostContainer.appendChild(criarPostElement(filteredPosts[0]));
+    } else {
+        // hideNoPosts(); //  Não é necessário chamar hideNoPosts aqui, pois o root.innerHTML = '' já remove a mensagem.
+          noPostsContainer.style.display = 'none' // isso resolve
+        filteredPosts.forEach(post => {
+            const postElement = criarPostElement(post);
+            root.appendChild(postElement);
+        });
+    }
+};
+
+
+const getAndRenderPosts = async (assigne) => {
+    try {
+        const data = await fetchData();
+        if (data && data.posts) {
+            renderPosts(data.posts, assigne);
+        } else {
+            showNoPosts('All');
+        }
+    } catch (error) {
+        console.error('Erro ao buscar dados:', error);
+        showNoPosts(assigne);
+    }
+};
+
+assigneValueSelect.addEventListener('change', () => {
+  const selectedAssigne = assigneValueSelect.value || 'All';
+  getAndRenderPosts(selectedAssigne);
+
+
+  //const urlParams = new URLSearchParams(window.location.search);
+  if (selectedAssigne === 'All') {
+      urlParams.delete('assigne');
+  } else {
+      //urlParams.set('assigne', selectedAssigne);
+  }
+  const newUrl = window.location.pathname + '?' + urlParams.toString();
+  window.history.replaceState({}, '', newUrl);
+});
+
+
+const init = async () => {
+  const assigneValue = new URLSearchParams(window.location.search).get('assigne') || 'All';
+  await getAndRenderPosts(assigneValue);
+
+  // Configuração do Select com os autores (após buscar os dados)
+  const data = await fetchData();
+  if (data && data.posts) {
+      const autores = new Set(data.posts.map(post => post.autor)); // Obtém autores únicos
+      autores.forEach(autor => {
+          const option = document.createElement('option');
+          option.value = autor;
+          option.textContent = autor;
+          assigneValueSelect.appendChild(option);
+      });
+  }
+
+};
+
+
+init();
