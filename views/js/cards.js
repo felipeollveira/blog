@@ -84,8 +84,10 @@ const fetchData = async () => {
             if (!response.ok) {
                 throw new Error(`Erro de rede - ${response.status}`);
             }
-            data = await response.json();
-            const responseToCache = response.clone();
+
+            const responseToCache = response.clone(); // Movido para ANTES de response.json()
+            data = await response.json(); // Ler o corpo da resposta APÓS clonar
+
             cache.put(apiurl, responseToCache);
         }
     } catch (error) {
@@ -98,7 +100,7 @@ const fetchData = async () => {
 
 const showNoPosts = (assigne) => {
     noPostsContainer.style.display = 'flex';
-    onePostContainer.style.display = 'none';
+    //onePostContainer.style.display = 'none';
 
     let noPostsMessage = document.getElementById('noPostsMessage');
 
@@ -108,12 +110,11 @@ const showNoPosts = (assigne) => {
         noPostsContainer.appendChild(noPostsMessage);
     }
 
-    noPostsMessage.textContent = assigne === 'All' ? 'Não há posts disponíveis.' : `Não há posts disponíveis para ${assigne}.`;
+    noPostsMessage.textContent = assigne === 'All' ? 'Não há posts disponíveis.' : '';
 };
 
 const renderPosts = (posts, assigne = 'All') => {
     root.innerHTML = '';
-
     const filteredPosts = assigne === 'All' ? posts : posts.filter(post => post.autor.toLowerCase() === assigne.toLowerCase());
 
     if (filteredPosts.length === 0) {
@@ -123,12 +124,8 @@ const renderPosts = (posts, assigne = 'All') => {
         noPostsContainer.style.display = 'none';
         onePostContainer.appendChild(criarPostElement(filteredPosts[0]));
     } else {
-        // hideNoPosts(); //  Não é necessário chamar hideNoPosts aqui, pois o root.innerHTML = '' já remove a mensagem.
-          noPostsContainer.style.display = 'none' // isso resolve
-        filteredPosts.forEach(post => {
-            const postElement = criarPostElement(post);
-            root.appendChild(postElement);
-        });
+        noPostsContainer.style.display = 'none';
+        filteredPosts.forEach(post => root.appendChild(criarPostElement(post))); // Simplificado
     }
 };
 
@@ -147,11 +144,13 @@ const getAndRenderPosts = async (assigne) => {
     }
 };
 
+  
 assigneValueSelect.addEventListener('change', () => {
   const selectedAssigne = assigneValueSelect.value || 'All';
   getAndRenderPosts(selectedAssigne);
 
-/*
+
+
   const urlParams = new URLSearchParams(window.location.search);
   if (selectedAssigne === 'All') {
       urlParams.delete('assigne');
@@ -160,7 +159,7 @@ assigneValueSelect.addEventListener('change', () => {
   }
   const newUrl = window.location.pathname + '?' + urlParams.toString();
   window.history.replaceState({}, '', newUrl);
-  */
+  
 });
 
 

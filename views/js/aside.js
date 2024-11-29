@@ -20,5 +20,6 @@ const profilesModal = () => {
     arrow.style.display ='inline-block'
     asideActions.classList.remove('visibility-05');
 
-
 }
+
+

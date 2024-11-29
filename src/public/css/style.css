@@ -30,8 +30,8 @@
     --colorsystem: rgb(47, 77, 168);
     --cor-h1: rgb(213, 213, 213);
     --background: #131313;
-    --background-fl:rgba(20, 20, 20, 0.548);
-    --cor-borda: rgba(255, 255, 255, 0.055);
+    --background-fl:rgba(22, 22, 22, 0.548);
+    --cor-borda: rgba(255, 255, 255, 0.075);
     --bs-font-sans-serif: 'Proxima Nova', sans-serif
 }
 

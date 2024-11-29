@@ -6,6 +6,8 @@
 
 
 
+
+
 @media screen and (min-width: 0px) and (max-width: 640px) {
     .aside-header{
         text-align: center;
@@ -14,9 +16,18 @@
 
         width: 100%;
     }
+    .aside{
+        position:relative;
+    }
 
   }
 
+  @media screen and (min-width:969px) and (max-width: 3500px) {
+    .aside{
+        position:fixed;
+    }
+
+  }
 
 .actions {
     padding: 12px;
