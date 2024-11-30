@@ -6,7 +6,25 @@ const apiurl = 'https://db-pubs.vercel.app/';
 
 // Funções auxiliares
 const quebrarTexto = (texto, comprimentoLinha = 30) => texto.match(new RegExp(`.{1,${comprimentoLinha}}`, 'g')).join('\n');
-const truncarTexto = (texto, maxLength = 156) => texto.length <= maxLength ? texto : texto.substring(0, maxLength) + '...';
+const truncarTexto = (texto, maxLength = 156) => {
+  if (texto.length <= maxLength) {
+    return texto; // Retorna o texto original se for menor que o limite
+  }
+
+  // Truncando o texto até o limite
+  let truncatedText = texto.substring(0, maxLength);
+
+  // Verifica se a última palavra foi cortada e ajusta
+  const lastSpaceIndex = truncatedText.lastIndexOf(' ');
+
+  if (lastSpaceIndex > -1) {
+    // Retorna o texto truncado até o final da última palavra
+    truncatedText = truncatedText.substring(0, lastSpaceIndex);
+  }
+
+  return truncatedText + '... '; // Adiciona '...' após o texto truncado
+};
+
 const calcularTempoLeitura = (texto) => {
     const palavras = texto.split(/\s+/).length;
     return palavras / 200 < 1 ? 'Menos de 1 minuto' : `${Math.ceil(palavras / 200)} minutos`;
@@ -31,7 +49,8 @@ const criarPostElement = (post) => {
 
     const titleLink = document.createElement('a');
     titleLink.className = 'title';
-    titleLink.href = `/${autor}/${titulo}/${_id}`;
+    const tituloCodificado = encodeURIComponent(titulo);
+    titleLink.href = `/${autor}/${tituloCodificado}/${_id}`;
     titleLink.textContent = quebrarTexto(titulo) + " ↵ ";
     header.appendChild(titleLink);
 
@@ -49,10 +68,21 @@ const criarPostElement = (post) => {
 
     card.appendChild(header);
 
+     const click = document.createElement('a');
+    click.textContent = "Acesse o post completo";
+    click.href = titleLink.href; 
+    click.classList.add('veja-mais');
+
+    
     const description = document.createElement('p');
     description.className = 'description';
-    description.textContent = truncarTexto(introducao);
+    
+
+    description.innerHTML = truncarTexto(introducao);  
+    description.appendChild(click);  
+    
     card.appendChild(description);
+    
 
     const postInfo = document.createElement('div');
     postInfo.className = 'post-info';
@@ -67,18 +97,22 @@ const criarPostElement = (post) => {
 };
 
 const fetchData = async () => {
+  
     const cacheName = 'data-cache';
     const cache = await caches.open(cacheName);
     let data;
 
     try {
+        /*
          const cachedResponse = await cache.match(apiurl);
         if (cachedResponse) {
+       
             data = await cachedResponse.json();
             console.log('Dados do cache usados');
         } else {
-         
+         */
             console.log('Buscando dados da API');
+      
             const response = await fetch(apiurl);
             if (!response.ok) {
                 throw new Error(`Erro de rede - ${response.status}`);
@@ -87,7 +121,7 @@ const fetchData = async () => {
             const responseToCache = response.clone(); // Clona a resposta para cache
             data = await response.json();
             cache.put(apiurl, responseToCache); // Coloca os dados no cache
-        }  
+          
     } catch (error) {
         console.error('Erro ao buscar dados:', error);
         return null;
