@@ -35,4 +35,4 @@ Este projeto está sob a licença MIT.
 ---
 
 **Blog**
-[blogview-projects.vercel.app/]
+[https://codeblog-git-main-felipeollveiras-projects.vercel.app]
