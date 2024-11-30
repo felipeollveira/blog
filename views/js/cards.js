@@ -2,7 +2,6 @@ const root = document.getElementById('root');
 const noPostsContainer = document.getElementById('casenopost');
 const onePostContainer = document.getElementById('caseOnepost');
 const assigneValueSelect = document.getElementById('dropdown');
-
 const apiurl = 'https://db-pubs.vercel.app/';
 
 // Funções auxiliares
@@ -10,8 +9,7 @@ const quebrarTexto = (texto, comprimentoLinha = 30) => texto.match(new RegExp(`.
 const truncarTexto = (texto, maxLength = 156) => texto.length <= maxLength ? texto : texto.substring(0, maxLength) + '...';
 const calcularTempoLeitura = (texto) => {
     const palavras = texto.split(/\s+/).length;
-    const tempoLeituraMinutos = palavras / 200;
-    return tempoLeituraMinutos < 1 ? 'Menos de 1 minuto' : `${Math.ceil(tempoLeituraMinutos)} minutos`;
+    return palavras / 200 < 1 ? 'Menos de 1 minuto' : `${Math.ceil(palavras / 200)} minutos`;
 };
 
 const criarInfoItem = (label, value) => {
@@ -33,7 +31,7 @@ const criarPostElement = (post) => {
 
     const titleLink = document.createElement('a');
     titleLink.className = 'title';
-    titleLink.href = `/${autor}/${titulo}/${_id}`; // Link com o ID do post
+    titleLink.href = `/${autor}/${titulo}/${_id}`;
     titleLink.textContent = quebrarTexto(titulo) + " ↵ ";
     header.appendChild(titleLink);
 
@@ -74,36 +72,34 @@ const fetchData = async () => {
     let data;
 
     try {
-        const cachedResponse = await cache.match(apiurl);
+         const cachedResponse = await cache.match(apiurl);
         if (cachedResponse) {
             data = await cachedResponse.json();
             console.log('Dados do cache usados');
         } else {
+         
             console.log('Buscando dados da API');
             const response = await fetch(apiurl);
             if (!response.ok) {
                 throw new Error(`Erro de rede - ${response.status}`);
             }
 
-            const responseToCache = response.clone(); // Movido para ANTES de response.json()
-            data = await response.json(); // Ler o corpo da resposta APÓS clonar
-
-            cache.put(apiurl, responseToCache);
-        }
+            const responseToCache = response.clone(); // Clona a resposta para cache
+            data = await response.json();
+            cache.put(apiurl, responseToCache); // Coloca os dados no cache
+        }  
     } catch (error) {
         console.error('Erro ao buscar dados:', error);
         return null;
     }
 
     return data;
-};
+}
+
 
 const showNoPosts = (assigne) => {
     noPostsContainer.style.display = 'flex';
-    //onePostContainer.style.display = 'none';
-
     let noPostsMessage = document.getElementById('noPostsMessage');
-
     if (!noPostsMessage) {
         noPostsMessage = document.createElement('h2');
         noPostsMessage.id = 'noPostsMessage';
@@ -119,16 +115,11 @@ const renderPosts = (posts, assigne = 'All') => {
 
     if (filteredPosts.length === 0) {
         showNoPosts(assigne);
-    } else if (filteredPosts.length === 1) {
-        onePostContainer.style.display = 'block';
-        noPostsContainer.style.display = 'none';
-        onePostContainer.appendChild(criarPostElement(filteredPosts[0]));
     } else {
         noPostsContainer.style.display = 'none';
-        filteredPosts.forEach(post => root.appendChild(criarPostElement(post))); // Simplificado
+        filteredPosts.forEach(post => root.appendChild(criarPostElement(post)));
     }
 };
-
 
 const getAndRenderPosts = async (assigne) => {
     try {
@@ -144,42 +135,35 @@ const getAndRenderPosts = async (assigne) => {
     }
 };
 
-  
 assigneValueSelect.addEventListener('change', () => {
-  const selectedAssigne = assigneValueSelect.value || 'All';
-  getAndRenderPosts(selectedAssigne);
+    const selectedAssigne = assigneValueSelect.value || 'All';
+    getAndRenderPosts(selectedAssigne);
 
-
-
-  const urlParams = new URLSearchParams(window.location.search);
-  if (selectedAssigne === 'All') {
-      urlParams.delete('assigne');
-  } else {
-      urlParams.set('assigne', selectedAssigne);
-  }
-  const newUrl = window.location.pathname + '?' + urlParams.toString();
-  window.history.replaceState({}, '', newUrl);
-  
+    const urlParams = new URLSearchParams(window.location.search);
+    if (selectedAssigne === 'All') {
+        urlParams.delete('assigne');
+    } else {
+        urlParams.set('assigne', selectedAssigne);
+    }
+    const newUrl = window.location.pathname + '?' + urlParams.toString();
+    window.history.replaceState({}, '', newUrl);
 });
 
-
 const init = async () => {
-  const assigneValue = new URLSearchParams(window.location.search).get('assigne') || 'All';
-  await getAndRenderPosts(assigneValue);
+    const assigneValue = new URLSearchParams(window.location.search).get('assigne') || 'All';
+    await getAndRenderPosts(assigneValue);
 
-  // Configuração do Select com os autores (após buscar os dados)
-  const data = await fetchData();
-  if (data && data.posts) {
-      const autores = new Set(data.posts.map(post => post.autor)); // Obtém autores únicos
-      autores.forEach(autor => {
-          const option = document.createElement('option');
-          option.value = autor;
-          option.textContent = autor;
-          assigneValueSelect.appendChild(option);
-      });
-  }
-
+    // Configuração do Select com os autores (após buscar os dados)
+    const data = await fetchData();
+    if (data && data.posts) {
+        const autores = new Set(data.posts.map(post => post.autor)); // Obtém autores únicos
+        autores.forEach(autor => {
+            const option = document.createElement('option');
+            option.value = autor;
+            option.textContent = autor;
+            assigneValueSelect.appendChild(option);
+        });
+    }
 };
-
 
 init();

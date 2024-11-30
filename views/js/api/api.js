@@ -1,7 +1,7 @@
 const urlApi = 'https://db-pubs.vercel.app';
 const cacheName = 'data-cache';
 
-/*
+
 const fetchData = async () => {
   try {
     await limparCache()
@@ -28,7 +28,7 @@ const fetchData = async () => {
     console.error('Erro ao buscar ou armazenar dados:', error.message);
     throw error;
   }
-};*/
+};
 
 // Função para limpar a cache
 const limparCache = async () => {
@@ -42,13 +42,20 @@ const limparCache = async () => {
 };
 
 
-
-(async () => {
+const fetchDataPeriodically = async () => {
   try {
     await fetchData();
+    console.log('Dados atualizados com sucesso');
   } catch (error) {
+    console.error('Erro ao buscar dados:', error);
   }
-})();
+};
+
+// Executa imediatamente ao carregar a página
+fetchDataPeriodically();
+
+// Define a execução a cada 5 minutos (300.000 milissegundos)
+setInterval(fetchDataPeriodically, 300000); // 300000 ms = 5 minutos
 
 
 
