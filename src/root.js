@@ -46,7 +46,7 @@ root.get('/:autor/:titulo/:id', extrairTitulo, (req, res) => {
 });
 
 
-root.get('/calculadoraimc', (req, res) => {
+root.get('/calculeIMC', (req, res) => {
   res.render('pages/imc');
 });
 

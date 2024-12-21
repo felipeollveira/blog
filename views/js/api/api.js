@@ -42,14 +42,14 @@ const limparCache = async () => {
 };
 
 
-
+/*
 (async () => {
   try {
     await fetchData();
   } catch (error) {
   }
 })();
-
+*/
 
 
 

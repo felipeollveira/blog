@@ -7,29 +7,41 @@
 <script type="text/javascript" src="static/js/cards.js"></script>
     
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
-	  (function() {
-		document.body.classList.toggle('loaded', true);
-		const root = document.getElementById('root');
-		let loadingElement = document.getElementById('loading');
-		const notify = document.getElementById('notify');
-		const aside = document.querySelector('aside')
-	
-		if (!root || root.children.length === 0) {
-		  
-		  loadingElement.classList.add('fade-out');
+	document.addEventListener('DOMContentLoaded', function () {
+    // Immediately Invoked Function Expression (IIFE) to encapsulate the logic
+    (function () {
+        // Add 'loaded' class to the body to signify that the content is loaded
+        document.body.classList.toggle('loaded', true);
+        
+        // Get references to key elements
+        const root = document.getElementById('root');
+        const loadingElement = document.getElementById('loading');
 
-		  setTimeout(function() {
-			loadingElement.parentNode.removeChild(loadingElement);
-			notify.textContent = 'Não há postagens disponíveis!';
-		  });
+        if (!loadingElement) {
+            console.warn('Loading element not found.');
+            return;
+        }
 
-		} else {
+        // Check if the root element is empty or doesn't exist
+        if (!root || root.children.length === 0) {
+            // Fade out the loading element
+            loadingElement.classList.add('fade-out');
 
-		  loadingElement.parentNode.removeChild(loadingElement);
-		}
-	  })();
-	});
+            // Wait for the fade-out transition to complete before removing the element
+            setTimeout(function () {
+                if (loadingElement.parentNode) {
+                    loadingElement.parentNode.removeChild(loadingElement);
+                }
+            }, 500); // Assuming a 500ms fade-out transition; adjust if necessary
+        } else {
+            // If root has content, remove the loading element immediately
+            if (loadingElement.parentNode) {
+                loadingElement.parentNode.removeChild(loadingElement);
+            }
+        }
+    })();
+});
+
 	</script>
 
  

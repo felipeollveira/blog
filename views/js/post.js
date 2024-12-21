@@ -25,7 +25,7 @@ const buscarPostNaAPI = async (tituloDoPost) => {
       console.error(`Post com título '${tituloDoPost}' não encontrado.`);
       throw new Error(`Post com título '${tituloDoPost}' não encontrado.`);
     }
-
+    console.log(post)
     return post;
 
   } catch (erro) {
@@ -47,7 +47,7 @@ const buscarPostNaAPI = async (tituloDoPost) => {
       if (!post) {
         throw new Error(`Post com título '${tituloDoPost}' não encontrado no fallback.`);
       }
-
+      
       return post;
     } catch (erroFallback) {
       console.error('Erro no fallback:', erroFallback.message);

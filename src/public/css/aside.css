@@ -39,6 +39,11 @@
 
 }
 
+.actions ul li{
+    width: 200px;
+    line-height: 16px;
+}
+
 .actions:nth-child(2) {
     max-height: 150px;
     overflow-y: auto;
