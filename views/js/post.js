@@ -4,14 +4,16 @@ const urlDadosJson = '../../src/data/dados.json';
 
 
 // Função para obter o título da URL
-const obterTituloDaURL = () => {
-  const urlAtual = window.location.href;
-  const partesUrl = urlAtual.split('/');
-  return decodeURIComponent(partesUrl[partesUrl.length - 2]);
+const obterIdDaURL = () => {
+  const urlAtual = new URL(window.location.href);
+  const partesUrl = urlAtual.pathname.split('/'); // Usa o pathname para pegar o caminho sem os parâmetros de consulta
+  return partesUrl[partesUrl.length - 1]; // Retorna o último segmento após a última barra
 };
 
+
+
 // Função para buscar dados do post na API
-const buscarPostNaAPI = async (tituloDoPost) => {
+const buscarPostNaAPI = async (IdDoPost) => {
   
   try {
     const cache = await caches.open('data-cache');
@@ -19,11 +21,11 @@ const buscarPostNaAPI = async (tituloDoPost) => {
 
     let dados = cachedResponse ? await cachedResponse.json() : null;
 
-    const post = dados.posts.find(post => post.titulo === tituloDoPost);
+    const post = dados.posts.find(post => post._id === IdDoPost);
 
     if (!post) {
-      console.error(`Post com título '${tituloDoPost}' não encontrado.`);
-      throw new Error(`Post com título '${tituloDoPost}' não encontrado.`);
+      console.error(`Post com ID '${IdDoPost}' não encontrado.`);
+      throw new Error(`Post com ID '${IdDoPost}' não encontrado.`);
     }
     console.log(post)
     return post;
@@ -145,8 +147,8 @@ const sanitizarHTML = (texto) => {
 };
 
 // Execução inicial
-const tituloDoPost = obterTituloDaURL();
-buscarPostNaAPI(tituloDoPost)
+const idPub = obterIdDaURL();
+buscarPostNaAPI(idPub)
   .then(post => {
     document.getElementById('loading').style.display = 'none';
     if (post) {

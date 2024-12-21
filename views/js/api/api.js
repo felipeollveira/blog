@@ -28,7 +28,8 @@ const fetchData = async () => {
     console.error('Erro ao buscar ou armazenar dados:', error.message);
     throw error;
   }
-};*/
+};
+*/
 
 // Função para limpar a cache
 const limparCache = async () => {
@@ -42,17 +43,29 @@ const limparCache = async () => {
 };
 
 
+<<<<<<< HEAD
 /*
 (async () => {
+=======
+const fetchDataPeriodically = async () => {
+>>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
   try {
     await fetchData();
+    console.log('Dados atualizados com sucesso');
   } catch (error) {
+    console.error('Erro ao buscar dados:', error);
   }
+<<<<<<< HEAD
 })();
 */
+=======
+};
 
+// Executa imediatamente ao carregar a página
+fetchDataPeriodically();
 
+// Define a execução a cada 5 minutos (300.000 milissegundos)
+//setInterval(fetchDataPeriodically, 300000); // 300000 ms = 5 minutos
 
+>>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
 
-
-  
