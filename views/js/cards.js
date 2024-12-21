@@ -112,7 +112,11 @@ const fetchData = async () => {
         } else {
          */
 <<<<<<< HEAD
+<<<<<<< HEAD
             //console.log('Buscando dados da API');
+=======
+            console.log('Buscando dados da API');
+>>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
 =======
             console.log('Buscando dados da API');
 >>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
@@ -174,6 +178,7 @@ const getAndRenderPosts = async (assigne) => {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 function debounce(func, wait) {
     let timeout;
     return function (...args) {
@@ -189,10 +194,15 @@ assigneValueSelect.addEventListener('change', debounce(() => {
     getAndRenderPosts(selectedAssigne);
 
 =======
+=======
+>>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
 assigneValueSelect.addEventListener('change', () => {
     const selectedAssigne = assigneValueSelect.value || 'All';
     getAndRenderPosts(selectedAssigne);
 
+<<<<<<< HEAD
+>>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
+=======
 >>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
     const urlParams = new URLSearchParams(window.location.search);
     if (selectedAssigne === 'All') {
@@ -203,7 +213,11 @@ assigneValueSelect.addEventListener('change', () => {
     const newUrl = window.location.pathname + '?' + urlParams.toString();
     window.history.replaceState({}, '', newUrl);
 <<<<<<< HEAD
+<<<<<<< HEAD
 }, 900));
+=======
+});
+>>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
 =======
 });
 >>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
@@ -211,6 +225,7 @@ assigneValueSelect.addEventListener('change', () => {
 const init = async () => {
     const assigneValue = new URLSearchParams(window.location.search).get('assigne') || 'All';
     await getAndRenderPosts(assigneValue);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     // Configuração do Select com os autores (após buscar os dados)
@@ -228,6 +243,9 @@ const init = async () => {
         assigneValueSelect.value = assigneValue;
 =======
 
+=======
+
+>>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
     // Configuração do Select com os autores (após buscar os dados)
     const data = await fetchData();
     if (data && data.posts) {
@@ -238,6 +256,9 @@ const init = async () => {
             option.textContent = autor;
             assigneValueSelect.appendChild(option);
         });
+<<<<<<< HEAD
+>>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
+=======
 >>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
     }
 };
