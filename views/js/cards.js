@@ -68,8 +68,9 @@ const criarPostElement = (post) => {
 
     card.appendChild(header);
 
-     const click = document.createElement('a');
-    click.textContent = "Acesse o post completo";
+    const click = document.createElement('a');
+
+    click.textContent = "Acesse o post completo !";
     click.href = titleLink.href; 
     click.classList.add('veja-mais');
 
@@ -82,6 +83,32 @@ const criarPostElement = (post) => {
     description.appendChild(click);  
     
     card.appendChild(description);
+
+    
+    function animateScroll() {
+        const scrollSpeed = 60; // Velocidade de rolagem em milissegundos
+        const pauseTime = 1500; // Tempo de pausa ao chegar no fim ou início
+
+        let direction = 1; // 1 para descer, -1 para subir
+
+        function scrollContent() {
+            description.scrollTop += direction;
+
+            if (description.scrollTop + description.clientHeight >= description.scrollHeight && direction === 1) {
+                direction = -1; // Inverte a direção para subir
+                setTimeout(scrollContent, pauseTime); // Pausa e reinicia
+            } else if (description.scrollTop <= 0 && direction === -1) {
+                direction = 1; // Inverte a direção para descer
+                setTimeout(scrollContent, pauseTime); // Pausa e reinicia
+            } else {
+                setTimeout(scrollContent, scrollSpeed);
+            }
+        }
+
+        scrollContent(); // Inicia a animação
+    }
+
+    animateScroll();
     
 
     const postInfo = document.createElement('div');
