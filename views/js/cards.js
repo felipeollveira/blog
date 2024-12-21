@@ -111,15 +111,7 @@ const fetchData = async () => {
             console.log('Dados do cache usados');
         } else {
          */
-<<<<<<< HEAD
-<<<<<<< HEAD
             //console.log('Buscando dados da API');
-=======
-            console.log('Buscando dados da API');
->>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
-=======
-            console.log('Buscando dados da API');
->>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
       
             const response = await fetch(apiurl);
             if (!response.ok) {
@@ -177,8 +169,6 @@ const getAndRenderPosts = async (assigne) => {
     }
 };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 function debounce(func, wait) {
     let timeout;
     return function (...args) {
@@ -193,17 +183,6 @@ assigneValueSelect.addEventListener('change', debounce(() => {
     const selectedAssigne = assigneValueSelect.value || 'All';
     getAndRenderPosts(selectedAssigne);
 
-=======
-=======
->>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
-assigneValueSelect.addEventListener('change', () => {
-    const selectedAssigne = assigneValueSelect.value || 'All';
-    getAndRenderPosts(selectedAssigne);
-
-<<<<<<< HEAD
->>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
-=======
->>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
     const urlParams = new URLSearchParams(window.location.search);
     if (selectedAssigne === 'All') {
         urlParams.delete('assigne');
@@ -212,21 +191,12 @@ assigneValueSelect.addEventListener('change', () => {
     }
     const newUrl = window.location.pathname + '?' + urlParams.toString();
     window.history.replaceState({}, '', newUrl);
-<<<<<<< HEAD
-<<<<<<< HEAD
 }, 900));
-=======
-});
->>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
-=======
-});
->>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
+
 
 const init = async () => {
     const assigneValue = new URLSearchParams(window.location.search).get('assigne') || 'All';
     await getAndRenderPosts(assigneValue);
-<<<<<<< HEAD
-<<<<<<< HEAD
 
     // Configuração do Select com os autores (após buscar os dados)
     const data = await fetchData();
@@ -241,26 +211,8 @@ const init = async () => {
 
         // Set the dropdown value to match the URL parameter (or 'All')
         assigneValueSelect.value = assigneValue;
-=======
-
-=======
-
->>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
-    // Configuração do Select com os autores (após buscar os dados)
-    const data = await fetchData();
-    if (data && data.posts) {
-        const autores = new Set(data.posts.map(post => post.autor)); // Obtém autores únicos
-        autores.forEach(autor => {
-            const option = document.createElement('option');
-            option.value = autor;
-            option.textContent = autor;
-            assigneValueSelect.appendChild(option);
-        });
-<<<<<<< HEAD
->>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
-=======
->>>>>>> c5d7361150cd7acb3ceb69dd1d93657a513d3c08
     }
 };
+
 
 init();
